@@ -1,6 +1,6 @@
 # DreamResolution prototype
 
-A clickable prototype of DreamResolution, a thirty-night dream intention practice. Open the published page and use the **Jump to** menu to visit any moment.
+A clickable prototype of DreamResolution, a thirty-night dream intention practice, with one-night intentions for things that come up in between. Open the published page and use the **Jump to** menu to visit any moment.
 
 This is a design prototype, not the app. Nothing you type leaves your browser.
 

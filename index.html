@@ -95,6 +95,10 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 <option value="day30">Night 30 · results</option>
 <option value="cycleNext">Night 30 · begin cycle 2</option>
 <option value="rest">Resting between cycles</option>
+<option value="oneTrial">One night · a first-time visitor</option>
+<option value="oneCompose">One night · write it mid-cycle</option>
+<option value="oneLock">One night · Lock Screen</option>
+<option value="oneMorning">One night · the morning after</option>
 <option value="home2">Cycle 2 · home</option>
 <option value="privacy">What leaves your phone</option>
 <option value="help">Help and safety</option>
@@ -171,7 +175,8 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 <div style="position: sticky; bottom: 0; margin-top: auto; padding: 28px 24px 40px; display: flex; flex-direction: column; gap: 12px; background: linear-gradient(to top, #12100E 72%, rgba(18,16,14,0));">
 <button type="button" role="switch" aria-checked="{{ adult }}" onClick="{{ toggleAdult }}" style="min-height: 56px; padding: 0 6px 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-radius: 28px; background: rgba(232,206,168,0.06); border: 1px solid rgba(232,206,168,0.14); box-shadow: inset 0 1px 0 rgba(255,240,220,0.05); color: #BDAE95; font-size: 17px; cursor: pointer;"><span>I’m 18 or older</span><span aria-hidden="true" style="width: 51px; height: 31px; flex: none; box-sizing: border-box; padding: 2px; border-radius: 16px; display: flex; justify-content: {{ adultSw.justify }}; background: {{ adultSw.bg }}; transition: background 200ms;"><span style="width: 27px; height: 27px; border-radius: 14px; background: {{ adultSw.knob }}; box-shadow: 0 1px 3px rgba(0,0,0,0.35);"></span></span></button>
 <button type="button" onClick="{{ begin }}" disabled="{{ notAdult }}" style="height: 56px; flex: none; border: none; border-radius: 28px; background: linear-gradient(180deg, #CF9A55 0%, #B8803A 100%); box-shadow: 0 12px 28px -12px rgba(192,138,62,0.6), inset 0 1px 0 rgba(255,236,200,0.35); color: #1A140C; font-size: 17px; font-weight: 600; cursor: pointer; opacity: {{ beginOpacity }}; transition: opacity 200ms;">Continue</button>
-<p style="margin: 0; text-align: center; font-size: 15px; color: #8E806B;">Setup takes about eight minutes</p>
+<button type="button" onClick="{{ tryOne }}" disabled="{{ notAdult }}" style="min-height: 44px; padding: 0 12px; align-self: center; display: flex; align-items: center; gap: 8px; background: transparent; border: none; color: #E0B878; font-size: 17px; font-weight: 600; cursor: pointer; opacity: {{ beginOpacity }}; transition: opacity 200ms;"><svg viewBox="0 0 120 120" width="16" height="16" aria-hidden="true" style="flex: none;"><path d="{{ starD }}" fill="currentColor"></path></svg><span>Or try a single night first</span></button>
+<p style="margin: 0; text-align: center; font-size: 15px; color: #8E806B;">The full setup takes about eight minutes. A single night takes one.</p>
 </div>
 </div>
 </sc-if>
@@ -841,6 +846,18 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 </div>
 </div>
 </sc-if>
+<sc-if value="{{ laOneAsk }}" hint-placeholder-val="{{ false }}">
+<div class="dr-pop" style="box-sizing: border-box; padding: 14px 16px 16px; border-radius: 28px; background: rgba(36,28,22,0.72); backdrop-filter: blur(30px) saturate(140%); -webkit-backdrop-filter: blur(30px) saturate(140%); border: 1px solid rgba(255,236,210,0.12); display: flex; flex-direction: column; gap: 12px;">
+<div style="display: flex; align-items: center; gap: 8px;"><svg viewBox="0 0 120 120" width="20" height="20" aria-hidden="true" style="flex: none;"><path d="{{ starD }}" fill="#E0A66E"></path></svg><span style="font-size: 15px; font-weight: 600;">Good morning</span><span style="margin-left: auto; font-size: 15px; color: #C4AE90;">Tonight only</span></div>
+<span class="dr-clamp2" style="font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 17px; line-height: 1.4; color: #C4AE90;">{{ oneStatementQuote }}</span>
+<span style="font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 26px; line-height: 1.2;">Did it show up in a dream?</span>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px;">
+<button type="button" onClick="{{ oneAnsNo }}" style="height: 48px; padding: 0 6px; border-radius: 24px; border: none; background: rgba(255,240,220,0.12); color: #F0E2CC; font-size: 15px; font-weight: 600; cursor: pointer;">No</button>
+<button type="button" onClick="{{ oneAnsMaybe }}" style="height: 48px; border-radius: 24px; border: none; background: rgba(255,240,220,0.12); color: #F0E2CC; font-size: 15px; font-weight: 600; cursor: pointer;">Maybe</button>
+<button type="button" onClick="{{ oneAnsYes }}" style="height: 48px; border-radius: 24px; border: none; background: linear-gradient(180deg, #DDA56E 0%, #C98E56 100%); color: #1A140C; font-size: 15px; font-weight: 600; cursor: pointer;">Yes</button>
+</div>
+</div>
+</sc-if>
 <sc-if value="{{ laThanks }}" hint-placeholder-val="{{ false }}">
 <div class="dr-pop" style="box-sizing: border-box; padding: 16px; border-radius: 28px; background: rgba(36,28,22,0.72); backdrop-filter: blur(30px) saturate(140%); -webkit-backdrop-filter: blur(30px) saturate(140%); border: 1px solid rgba(255,236,210,0.12); display: flex; align-items: center; gap: 14px;">
 <span aria-hidden="true" style="width: 40px; height: 40px; flex: none; border-radius: 20px; background: rgba(212,154,99,0.2); display: flex; align-items: center; justify-content: center; color: #E0A66E;"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" style="stroke-width: 2.25; stroke-linecap: round; stroke-linejoin: round;"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
@@ -941,7 +958,21 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 <button type="button" onClick="{{ bannerAction }}" style="height: 44px; border-radius: 22px; border: 1px solid rgba(232,206,168,0.2); background: transparent; color: #DCC9A6; font-size: 15px; font-weight: 600; cursor: pointer;">{{ bannerButton }}</button>
 </div>
 </sc-if>
-<sc-if value="{{ notResting }}" hint-placeholder-val="{{ true }}">
+<sc-if value="{{ noCycle }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 6px 24px 0;">
+<div aria-hidden="true" style="position: relative; width: 190px; height: 190px; display: flex; align-items: center; justify-content: center;">
+<div style="position: absolute; inset: 0; box-sizing: border-box; border-radius: 50%; border: 1px solid rgba(232,206,168,0.08);"></div>
+<div class="dr-halo" style="position: absolute; inset: 30px; border-radius: 50%; background: radial-gradient(circle, rgba(226,186,128,0.26) 0%, rgba(226,186,128,0.06) 55%, rgba(226,186,128,0) 72%);"></div>
+<svg class="dr-float" viewBox="0 0 120 120" width="110" height="110" style="position: relative; filter: drop-shadow(0 0 26px rgba(222,186,130,0.45));"><defs><radialGradient id="drHomeStar" cx="58%" cy="38%" r="72%"><stop offset="0%" style="stop-color: #F4DEB4;"></stop><stop offset="100%" style="stop-color: #C8995A;"></stop></radialGradient></defs><path d="{{ starD }}" fill="url(#drHomeStar)"></path></svg>
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center;">
+<span style="font-size: 15px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8E806B;">{{ tonightAt }}</span>
+<h1 style="margin: 0; font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 36px; font-weight: 400; line-height: 1.1; letter-spacing: -0.5px; color: #E2CDA8;">One night at a time</h1>
+<span style="font-size: 17px; line-height: 1.45; color: #A3937B;">{{ noCycleSub }}</span>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ hasCycleHero }}" hint-placeholder-val="{{ true }}">
 <div style="display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 6px 24px 0;">
 <div aria-hidden="true" style="position: relative; width: 210px; height: 210px; display: flex; align-items: center; justify-content: center;">
 <div style="position: absolute; inset: 0; box-sizing: border-box; border-radius: 50%; border: 1px solid rgba(232,206,168,0.08);"></div>
@@ -976,6 +1007,7 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 <button type="button" onClick="{{ startCycle }}" style="height: 52px; border: none; border-radius: 26px; background: linear-gradient(180deg, #CF9A55 0%, #B8803A 100%); box-shadow: 0 10px 22px -12px rgba(192,138,62,0.6), inset 0 1px 0 rgba(255,236,200,0.35); color: #1A140C; font-size: 17px; font-weight: 600; cursor: pointer;">Begin a new cycle</button>
 </div>
 </sc-if>
+<sc-if value="{{ showStatementCard }}" hint-placeholder-val="{{ true }}">
 <div style="margin: 0 24px; padding: 20px; border-radius: 26px; background: linear-gradient(180deg, rgba(232,206,168,0.075) 0%, rgba(232,206,168,0.035) 100%); border: 1px solid rgba(232,206,168,0.11); box-shadow: inset 0 1px 0 rgba(255,240,220,0.05); display: flex; flex-direction: column; gap: 14px;">
 <span style="font-size: 15px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8E806B;">{{ statementLabel }}</span>
 <p style="margin: 0; font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 20px; line-height: 1.45; color: #DCC9A6; text-wrap: pretty;">{{ statementOrPh }}</p>
@@ -986,6 +1018,23 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 </sc-if>
 </div>
 </div>
+</sc-if>
+<div style="margin: 0 24px; padding: 18px 18px 18px; border-radius: 26px; background: linear-gradient(180deg, rgba(232,206,168,0.075) 0%, rgba(232,206,168,0.035) 100%); border: 1px solid rgba(232,206,168,0.11); box-shadow: inset 0 1px 0 rgba(255,240,220,0.05); display: flex; flex-direction: column; gap: 12px;">
+<div style="display: flex; align-items: center; gap: 8px;"><svg viewBox="0 0 120 120" width="18" height="18" aria-hidden="true" style="flex: none;"><path d="{{ starD }}" fill="#E0B878"></path></svg><span style="font-size: 15px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8E806B; color: #E0B878;">Tonight only</span></div>
+<sc-if value="{{ tonightIdle }}" hint-placeholder-val="{{ true }}">
+<span style="font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 21px; line-height: 1.3; color: #E2CDA8;">{{ oneCardTitle }}</span>
+<span style="font-size: 17px; line-height: 1.5; color: #A3937B;">{{ oneCardBody }}</span>
+<button type="button" onClick="{{ startOne }}" style="height: 48px; border-radius: 24px; border: 1px solid rgba(212,154,99,0.4); background: rgba(192,138,62,0.12); color: #E8C48C; font-size: 17px; font-weight: 600; cursor: pointer;">Set a one-night intention</button>
+</sc-if>
+<sc-if value="{{ tonightSet }}" hint-placeholder-val="{{ false }}">
+<span style="font-size: 17px; line-height: 1.5; color: #A3937B;">{{ oneCardSetBody }}</span>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px;">
+<button type="button" onClick="{{ oneEdit }}" style="height: 48px; padding: 0 8px; border-radius: 24px; border: 1px solid rgba(232,206,168,0.18); background: rgba(232,206,168,0.06); color: #DCC9A6; font-size: 15px; font-weight: 600; cursor: pointer;">Edit the words</button>
+<button type="button" onClick="{{ cancelOne }}" style="height: 48px; padding: 0 8px; border-radius: 24px; border: 1px solid rgba(232,206,168,0.18); background: rgba(232,206,168,0.06); color: #DCC9A6; font-size: 15px; font-weight: 600; cursor: pointer;">{{ oneCancelLabel }}</button>
+</div>
+</sc-if>
+</div>
+<sc-if value="{{ showCycleCards }}" hint-placeholder-val="{{ true }}">
 <div style="margin: 0 24px; display: flex; flex-direction: column; gap: 14px;">
 <div style="display: flex; align-items: baseline; justify-content: space-between;">
 <span style="font-size: 15px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8E806B;">{{ moonsLabel }}</span>
@@ -1020,6 +1069,30 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 <p style="margin: 0; font-size: 15px; line-height: 1.45; color: #958772;">What you notice each morning collects here.</p>
 </sc-if>
 </div>
+</sc-if>
+<sc-if value="{{ hasOneLog }}" hint-placeholder-val="{{ false }}">
+<div style="padding: 0 24px; display: flex; flex-direction: column; gap: 10px;">
+<span style="font-size: 15px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8E806B;">One-night intentions</span>
+<sc-for list="{{ oneCards }}" as="e" hint-placeholder-count="1">
+<div style="padding: 16px; border-radius: 22px; background: linear-gradient(180deg, rgba(232,206,168,0.06) 0%, rgba(232,206,168,0.03) 100%); border: 1px solid rgba(232,206,168,0.11); display: flex; flex-direction: column; gap: 10px;">
+<div style="display: flex; gap: 10px; align-items: flex-start;"><svg viewBox="0 0 120 120" width="18" height="18" aria-hidden="true" style="flex: none; margin-top: 3px;"><path d="{{ starD }}" fill="#D9AE70"></path></svg><span class="dr-clamp2" style="flex: 1; font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 17px; line-height: 1.45; color: #BDAE95;">{{ e.statement }}</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px;">
+<span style="padding: 5px 10px; border-radius: 12px; background: rgba(232,206,168,0.07); font-size: 15px; color: #BDAE95;">{{ e.chip1 }}</span>
+<sc-if value="{{ e.hasChip2 }}" hint-placeholder-val="{{ true }}"><span style="padding: 5px 10px; border-radius: 12px; background: rgba(232,206,168,0.07); font-size: 15px; color: #BDAE95;">{{ e.chip2 }}</span></sc-if>
+</div>
+<sc-if value="{{ e.hasNote }}" hint-placeholder-val="{{ false }}"><span style="font-size: 15px; line-height: 1.45; color: #958772;">{{ e.note }}</span></sc-if>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{ noCycle }}" hint-placeholder-val="{{ false }}">
+<div style="margin: 0 24px; padding: 18px 18px 18px; border-radius: 26px; background: linear-gradient(180deg, rgba(232,206,168,0.075) 0%, rgba(232,206,168,0.035) 100%); border: 1px solid rgba(232,206,168,0.11); box-shadow: inset 0 1px 0 rgba(255,240,220,0.05); display: flex; flex-direction: column; gap: 12px;">
+<span style="font-size: 15px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8E806B;">The full practice</span>
+<span style="font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 21px; line-height: 1.3; color: #E2CDA8;">Thirty nights. One intention.</span>
+<span style="font-size: 17px; line-height: 1.5; color: #A3937B;">For something that keeps coming back. A morning check-in each day, and a before-and-after picture at the end.</span>
+<button type="button" onClick="{{ beginPractice }}" style="height: 52px; border: none; border-radius: 26px; background: linear-gradient(180deg, #CF9A55 0%, #B8803A 100%); box-shadow: 0 10px 22px -12px rgba(192,138,62,0.6), inset 0 1px 0 rgba(255,236,200,0.35); color: #1A140C; font-size: 17px; font-weight: 600; cursor: pointer;">Begin the thirty-night practice</button>
+</div>
+</sc-if>
 <sc-if value="{{ hasHistory }}" hint-placeholder-val="{{ false }}">
 <div style="padding: 0 24px; display: flex; flex-direction: column; gap: 10px;">
 <span style="font-size: 15px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8E806B;">Your cycles</span>
@@ -1039,7 +1112,7 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 <div style="margin: 0 24px; border-radius: 22px; overflow: hidden; background: rgba(232,206,168,0.045); border: 1px solid rgba(232,206,168,0.10); display: flex; flex-direction: column;">
 <button type="button" onClick="{{ toPrivacy }}" style="min-height: 52px; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; text-align: left; background: transparent; border: none; border-bottom: 1px solid rgba(232,206,168,0.08); color: #BDAE95; font-size: 17px; cursor: pointer;"><span>What leaves your phone</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button>
 <button type="button" onClick="{{ toHelp }}" style="min-height: 52px; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; text-align: left; background: transparent; border: none; border-bottom: {{ helpBorder }}; color: #BDAE95; font-size: 17px; cursor: pointer;"><span>Help and safety</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button>
-<sc-if value="{{ notResting }}" hint-placeholder-val="{{ true }}">
+<sc-if value="{{ canPause }}" hint-placeholder-val="{{ true }}">
 <button type="button" onClick="{{ toPause }}" style="min-height: 52px; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; text-align: left; background: transparent; border: none; color: #C9806A; font-size: 17px; cursor: pointer;"><span>Pause or end this cycle</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button>
 </sc-if>
 </div>
@@ -1264,6 +1337,151 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 </div>
 <div style="position: sticky; bottom: 0; margin-top: auto; padding: 28px 24px 40px; display: flex; flex-direction: column; gap: 12px; background: linear-gradient(to top, #12100E 72%, rgba(18,16,14,0));">
 <button type="button" onClick="{{ beginCycleNow }}" style="height: 56px; border: none; border-radius: 28px; background: linear-gradient(180deg, #CF9A55 0%, #B8803A 100%); box-shadow: 0 12px 28px -12px rgba(192,138,62,0.6), inset 0 1px 0 rgba(255,236,200,0.35); color: #1A140C; font-size: 17px; font-weight: 600; cursor: pointer;">{{ startCta }}</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ on.oneStart }}" hint-placeholder-val="{{ false }}">
+<div class="dr-enter" style="min-height: 852px; box-sizing: border-box; padding-top: 62px; display: flex; flex-direction: column;">
+<div style="display: flex; align-items: center; gap: 14px; padding: 0 20px;">
+<button type="button" onClick="{{ oneBack }}" aria-label="Back" style="width: 44px; height: 44px; flex: none; padding: 0; border-radius: 22px; display: flex; align-items: center; justify-content: center; background: rgba(232,206,168,0.08); border: 1px solid rgba(232,206,168,0.14); box-shadow: inset 0 1px 0 rgba(255,240,220,0.06); color: #BDAE95; cursor: pointer;"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button>
+<span style="flex: 1;"></span>
+</div>
+<div style="padding: 28px 24px 0; display: flex; flex-direction: column; gap: 16px;">
+<span style="display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8E806B; color: #E0B878;"><svg viewBox="0 0 120 120" width="16" height="16" aria-hidden="true" style="flex: none;"><path d="{{ starD }}" fill="#E0B878"></path></svg>Tonight only</span>
+<h1 style="margin: 0; font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 32px; font-weight: 400; line-height: 1.14; letter-spacing: -0.4px; color: #E2CDA8;">What’s on your mind tonight?</h1>
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #A3937B;">{{ oneLead }}</p>
+<div role="group" aria-label="Kind of intention" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 22px; background: rgba(232,206,168,0.05); border: 1px solid rgba(232,206,168,0.10);">
+<sc-for list="{{ oneTabs }}" as="t" hint-placeholder-count="2">
+<button type="button" onClick="{{ t.pick }}" aria-pressed="{{ t.selected }}" style="height: 44px; border: none; border-radius: 18px; background: {{ t.bg }}; color: {{ t.color }}; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 200ms, color 200ms;">{{ t.label }}</button>
+</sc-for>
+</div>
+<sc-if value="{{ oneFeel }}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 16px;">
+<div style="display: flex; flex-direction: column; gap: 10px;">
+<label for="dr-of1" style="font-size: 17px; font-weight: 600; color: #DCC9A6;">What would you like to resolve?</label>
+<input id="dr-of1" type="text" value="{{ oF1 }}" onChange="{{ onOF1 }}" placeholder="e.g. the sting of what she said" style="width: 100%; box-sizing: border-box; height: 54px; padding: 0 16px; border-radius: 18px; border: 1px solid rgba(232,206,168,0.18); background: rgba(232,206,168,0.05); color: #DCC9A6; font-size: 17px;" />
+<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+<sc-for list="{{ oChipsA }}" as="o" hint-placeholder-count="3">
+<button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.selected }}" style="min-height: 44px; padding: 8px 14px; border-radius: 22px; border: {{ o.border }}; background: {{ o.bg }}; color: #BDAE95; font-size: 15px; text-align: left; cursor: pointer;">{{ o.label }}</button>
+</sc-for>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px;">
+<label for="dr-of2" style="font-size: 17px; font-weight: 600; color: #DCC9A6;">How would you like to feel instead?</label>
+<input id="dr-of2" type="text" value="{{ oF2 }}" onChange="{{ onOF2 }}" placeholder="e.g. calm and at ease" style="width: 100%; box-sizing: border-box; height: 54px; padding: 0 16px; border-radius: 18px; border: 1px solid rgba(232,206,168,0.18); background: rgba(232,206,168,0.05); color: #DCC9A6; font-size: 17px;" />
+<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+<sc-for list="{{ oChipsB }}" as="o" hint-placeholder-count="3">
+<button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.selected }}" style="min-height: 44px; padding: 8px 14px; border-radius: 22px; border: {{ o.border }}; background: {{ o.bg }}; color: #BDAE95; font-size: 15px; text-align: left; cursor: pointer;">{{ o.label }}</button>
+</sc-for>
+</div>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ oneClarity }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 10px;">
+<label for="dr-oq" style="font-size: 17px; font-weight: 600; color: #DCC9A6;">What would you like clarity about?</label>
+<input id="dr-oq" type="text" value="{{ oQ }}" onChange="{{ onOQ }}" placeholder="e.g. whether to take the new role" style="width: 100%; box-sizing: border-box; height: 54px; padding: 0 16px; border-radius: 18px; border: 1px solid rgba(232,206,168,0.18); background: rgba(232,206,168,0.05); color: #DCC9A6; font-size: 17px;" />
+<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+<sc-for list="{{ oChipsQ }}" as="o" hint-placeholder-count="5">
+<button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.selected }}" style="min-height: 44px; padding: 8px 14px; border-radius: 22px; border: {{ o.border }}; background: {{ o.bg }}; color: #BDAE95; font-size: 15px; text-align: left; cursor: pointer;">{{ o.label }}</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+<div style="padding: 20px; border-radius: 26px; background: linear-gradient(180deg, rgba(232,206,168,0.07) 0%, rgba(232,206,168,0.03) 100%); border: 1px solid rgba(232,206,168,0.11); box-shadow: inset 0 1px 0 rgba(255,240,220,0.05); display: flex; flex-direction: column; gap: 4px;">
+<span style="margin-bottom: 6px; font-size: 15px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8E806B;">Tonight’s statement</span>
+<sc-for list="{{ onePreview }}" as="ln" hint-placeholder-count="6">
+<span style="display: block; font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 21px; line-height: 1.4; color: {{ ln.color }}; font-style: {{ ln.italic }}; transition: color 200ms;">{{ ln.text }}</span>
+</sc-for>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #8E806B;">One night is a light touch. If this keeps coming back, a thirty-night cycle gives it more room.</p>
+</div>
+<div style="position: sticky; bottom: 0; margin-top: auto; padding: 28px 24px 40px; display: flex; flex-direction: column; background: linear-gradient(to top, #12100E 72%, rgba(18,16,14,0));">
+<button type="button" onClick="{{ setOne }}" disabled="{{ oneNotReady }}" style="height: 56px; border: none; border-radius: 28px; background: linear-gradient(180deg, #CF9A55 0%, #B8803A 100%); box-shadow: 0 12px 28px -12px rgba(192,138,62,0.6), inset 0 1px 0 rgba(255,236,200,0.35); color: #1A140C; font-size: 17px; font-weight: 600; cursor: pointer; opacity: {{ oneSetOpacity }}; transition: opacity 200ms;">Set for tonight</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ on.oneSet }}" hint-placeholder-val="{{ false }}">
+<div class="dr-enter" style="min-height: 852px; box-sizing: border-box; padding-top: 96px; display: flex; flex-direction: column;">
+<div aria-hidden="true" style="align-self: center; position: relative; width: 150px; height: 150px; display: flex; align-items: center; justify-content: center;">
+<div class="dr-halo" style="position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle, rgba(226,186,128,0.30) 0%, rgba(226,186,128,0.07) 52%, rgba(226,186,128,0) 72%);"></div>
+<svg class="dr-float" viewBox="0 0 120 120" width="112" height="112" style="position: relative; filter: drop-shadow(0 0 26px rgba(222,186,130,0.5));"><defs><radialGradient id="drOneStar" cx="58%" cy="38%" r="72%"><stop offset="0%" style="stop-color: #F4DEB4;"></stop><stop offset="100%" style="stop-color: #C8995A;"></stop></radialGradient></defs><path d="{{ starD }}" fill="url(#drOneStar)"></path></svg>
+</div>
+<div style="padding: 26px 28px 0; display: flex; flex-direction: column; gap: 14px; text-align: center;">
+<span style="font-size: 15px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8E806B;">Tonight only</span>
+<h1 style="margin: 0; font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 34px; font-weight: 400; line-height: 1.14; letter-spacing: -0.4px; color: #E2CDA8;">Set for tonight</h1>
+<div style="margin: 4px 0; padding: 18px 18px 16px; border-radius: 24px; background: linear-gradient(180deg, rgba(232,206,168,0.07) 0%, rgba(232,206,168,0.03) 100%); border: 1px solid rgba(232,206,168,0.11); display: flex; flex-direction: column; gap: 2px; text-align: left;">
+<sc-for list="{{ oneStatementLines }}" as="ln" hint-placeholder-count="6">
+<span style="display: block; font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 19px; line-height: 1.42; color: {{ ln.color }};">{{ ln.text }}</span>
+</sc-for>
+</div>
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #A3937B;">{{ oneSetLead }}</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #8E806B;">{{ oneSetNote }}</p>
+</div>
+<div style="position: sticky; bottom: 0; margin-top: auto; padding: 28px 24px 40px; display: flex; flex-direction: column; gap: 12px; background: linear-gradient(to top, #12100E 72%, rgba(18,16,14,0));">
+<button type="button" onClick="{{ onePreviewNight }}" style="height: 56px; border: none; border-radius: 28px; background: linear-gradient(180deg, #CF9A55 0%, #B8803A 100%); box-shadow: 0 12px 28px -12px rgba(192,138,62,0.6), inset 0 1px 0 rgba(255,236,200,0.35); color: #1A140C; font-size: 17px; font-weight: 600; cursor: pointer;">Preview tonight</button>
+<button type="button" onClick="{{ toHome }}" style="height: 56px; border-radius: 28px; border: 1px solid rgba(232,206,168,0.16); background: rgba(232,206,168,0.06); box-shadow: inset 0 1px 0 rgba(255,240,220,0.05); color: #DCC9A6; font-size: 17px; font-weight: 600; cursor: pointer;">Go to home</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ on.oneMorning }}" hint-placeholder-val="{{ false }}">
+<div class="dr-enter" style="min-height: 852px; box-sizing: border-box; padding-top: 62px; display: flex; flex-direction: column; color: #DCCBB1;">
+<div style="display: flex; align-items: center; gap: 14px; padding: 0 20px;">
+<button type="button" onClick="{{ oneMorningBack }}" aria-label="Back" style="width: 44px; height: 44px; flex: none; padding: 0; border-radius: 22px; display: flex; align-items: center; justify-content: center; background: rgba(240,214,180,0.09); border: 1px solid rgba(240,214,180,0.16); color: #DCCBB1; cursor: pointer;"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button>
+<span style="flex: 1; text-align: center; font-size: 15px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #A08F77;">Tonight only · morning</span>
+<span style="width: 44px; flex: none;"></span>
+</div>
+<div style="padding: 30px 24px 0; display: flex; flex-direction: column; gap: 16px;">
+<span style="align-self: flex-start; padding: 5px 12px; border-radius: 13px; background: rgba(221,165,110,0.16); border: 1px solid rgba(221,165,110,0.32); font-size: 15px; font-weight: 600; color: #E8BE88;">{{ oneMorningKicker }}</span>
+<h1 style="margin: 0; font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 32px; font-weight: 400; line-height: 1.14; letter-spacing: -0.4px; color: #EEDDC2;">How do you feel about it now?</h1>
+<div style="padding: 14px 16px; border-radius: 20px; background: rgba(240,214,180,0.06); border: 1px solid rgba(240,214,180,0.13);"><span class="dr-clamp2" style="font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 17px; line-height: 1.45; color: #A8977E;">{{ oneStatementQuote }}</span></div>
+<div role="group" aria-label="How you feel about it now" style="display: flex; flex-wrap: wrap; gap: 8px;">
+<sc-for list="{{ shiftOpts }}" as="o" hint-placeholder-count="3">
+<button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.selected }}" style="min-height: 44px; padding: 8px 16px; border-radius: 22px; border: {{ o.border }}; background: {{ o.bg }}; color: {{ o.color }}; font-size: 17px; cursor: pointer; transition: background 200ms, border-color 200ms;">{{ o.label }}</button>
+</sc-for>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<label for="dr-onote" style="font-size: 15px; color: #A8977E;">What came to you? (optional)</label>
+<textarea id="dr-onote" rows="4" value="{{ oNote }}" onChange="{{ onONote }}" placeholder="A dream, a thought on waking, a different angle" style="width: 100%; box-sizing: border-box; padding: 14px 16px; border-radius: 18px; border: 1px solid rgba(240,214,180,0.2); background: rgba(240,214,180,0.07); color: #EEDDC2; font-size: 17px; line-height: 1.45; resize: none;"></textarea>
+</div>
+<sc-if value="{{ oneDreamedYes }}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; padding: 12px 14px; border-radius: 16px; background: rgba(240,214,180,0.07); font-size: 15px; line-height: 1.45; color: #A8977E;">Work with dreams inwardly. Never act them out in waking life.</p>
+</sc-if>
+<sc-if value="{{ oneShowDeeper }}" hint-placeholder-val="{{ false }}">
+<div class="dr-pop" style="padding: 16px 18px; border-radius: 22px; background: linear-gradient(180deg, rgba(240,214,180,0.09) 0%, rgba(240,214,180,0.045) 100%); border: 1px solid rgba(240,214,180,0.14); display: flex; flex-direction: column; gap: 12px;">
+<span style="font-size: 17px; line-height: 1.5; color: #DCCBB1;">{{ oneDeeperText }}</span>
+<sc-if value="{{ oneCanConvert }}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{ oneConvert }}" style="height: 48px; border-radius: 24px; border: 1px solid rgba(221,165,110,0.45); background: transparent; color: #E8BE88; font-size: 17px; font-weight: 600; cursor: pointer;">{{ oneConvertLabel }}</button>
+</sc-if>
+</div>
+</sc-if>
+</div>
+<div style="position: sticky; bottom: 0; margin-top: auto; padding: 24px 24px 34px; display: flex; flex-direction: column; gap: 6px; background: linear-gradient(to top, #1E1A16 72%, rgba(30,26,22,0));">
+<button type="button" onClick="{{ oneSave }}" style="height: 56px; border: none; border-radius: 28px; background: linear-gradient(180deg, #DDA56E 0%, #C98E56 100%); box-shadow: 0 12px 28px -12px rgba(212,154,99,0.6), inset 0 1px 0 rgba(255,236,200,0.35); color: #1A140C; font-size: 17px; font-weight: 600; cursor: pointer;">Save</button>
+<button type="button" onClick="{{ toHard }}" style="align-self: center; min-height: 44px; padding: 0 12px; background: transparent; border: none; color: #D9967A; font-size: 17px; cursor: pointer;">This was hard</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ on.oneInvite }}" hint-placeholder-val="{{ false }}">
+<div class="dr-enter" style="min-height: 852px; box-sizing: border-box; padding-top: 104px; display: flex; flex-direction: column;">
+<div aria-hidden="true" style="align-self: center; display: flex; align-items: center; gap: 16px;">
+<svg viewBox="0 0 120 120" width="54" height="54" style="filter: drop-shadow(0 0 16px rgba(222,186,130,0.5));"><path d="{{ starD }}" fill="#E2B26E"></path></svg>
+<span style="width: 28px; height: 1px; background: rgba(232,206,168,0.3);"></span>
+<sc-for list="{{ phaseRow }}" as="m" hint-placeholder-count="7"><svg viewBox="0 0 120 120" width="18" height="18"><circle cx="60" cy="60" r="52" fill="#1F1A15" stroke="rgba(232,206,168,0.22)" style="stroke-width: 4;"></circle><path d="{{ m.d }}" fill="{{ m.fill }}"></path></svg></sc-for>
+</div>
+<div style="padding: 36px 28px 0; display: flex; flex-direction: column; gap: 14px; text-align: center;">
+<span style="font-size: 15px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8E806B;">Your first night</span>
+<h1 style="margin: 0; font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 34px; font-weight: 400; line-height: 1.14; letter-spacing: -0.4px; color: #E2CDA8;">One night is a beginning</h1>
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #A3937B;">A single night can loosen something. Thirty nights with one intention give it room to work, with a morning check-in each day and a before-and-after picture at the end.</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #8E806B;">Tonight’s words carry over, and you can change them.</p>
+</div>
+<div style="position: sticky; bottom: 0; margin-top: auto; padding: 28px 24px 40px; display: flex; flex-direction: column; gap: 12px; background: linear-gradient(to top, #12100E 72%, rgba(18,16,14,0));">
+<button type="button" onClick="{{ oneInviteBegin }}" style="height: 56px; border: none; border-radius: 28px; background: linear-gradient(180deg, #CF9A55 0%, #B8803A 100%); box-shadow: 0 12px 28px -12px rgba(192,138,62,0.6), inset 0 1px 0 rgba(255,236,200,0.35); color: #1A140C; font-size: 17px; font-weight: 600; cursor: pointer;">Begin the thirty-night practice</button>
+<button type="button" onClick="{{ oneInviteLater }}" style="height: 56px; border-radius: 28px; border: 1px solid rgba(232,206,168,0.16); background: rgba(232,206,168,0.06); box-shadow: inset 0 1px 0 rgba(255,240,220,0.05); color: #DCC9A6; font-size: 17px; font-weight: 600; cursor: pointer;">Not now</button>
 </div>
 </div>
 </sc-if>
@@ -1585,6 +1803,7 @@ class Component extends DCLogic {
       aOn: false, aPass: 1, aPhase: 'reading', aPaused: false, aWhere: '', aVoice: false, aT: 0, lockDim: false,
       laOpen: false, playedTonight: false, aSpan: null, aWait: false, aSrc: '',
       cycle: 1, history: [], archived: 0, renew: '', startWhen: 'tonight', resting: false,
+      oForm: 'feel', oF1: '', oF2: '', oQ: '', oSet: false, oDone: false, oFrom: '', oDreamed: '', oShift: '', oNote: '', oneLog: [], aside: [], trial: false,
       island: 'compact', islandPhase: 'bed', lockPhase: 'bed',
       mPhase: 'ask', mAnswer: '', backfillDone: false,
       note: '', dream: '', showDream: false, speaking: false,
@@ -1637,9 +1856,9 @@ class Component extends DCLogic {
       if (Object.keys(fix).length) this.setState(fix);
     }
     // Get tonight's statement ready in the chosen voice once it is set, so it plays without a wait.
-    const PREP = { seal: 1, nights: 1, lockSetup: 1, ready: 1, home: 1, lock: 1, homeScreen: 1, tonight: 1, listen: 1, cycleStart: 1 };
+    const PREP = { seal: 1, nights: 1, lockSetup: 1, ready: 1, home: 1, lock: 1, homeScreen: 1, tonight: 1, listen: 1, cycleStart: 1, oneSet: 1 };
     if ((PREP[now] || (now === 'compose' && !this.state.sheet && !this.state.tts)) && this.hasVoice()) {
-      const cp = this.composeParts(this.state);
+      const cp = now === 'compose' ? this.composeParts(this.state) : this.nightParts(this.state);
       if (cp.filled) {
         const v = this.voiceId();
         const texts = cp.chunks.map((c) => c.text);
@@ -1680,6 +1899,18 @@ class Component extends DCLogic {
   phaseOf(n) {
     const p = 0.08 + ((n - 1) / 29) * 0.84;
     return { f: (1 - Math.cos(2 * Math.PI * p)) / 2, waxing: p < 0.5 };
+  }
+
+  oneParts(st) {
+    if (st.oForm === 'clarity') {
+      const q = String(st.oQ || '').trim().replace(/^(?:tonight\s+in\s+my\s+dreams,?\s*)?(?:i\s+will\s+)?(?:find\s+)?(?:some\s+)?(?:clarity\s+)?(?:about|on)\s+/i, '');
+      return this.composeParts(Object.assign({}, st, { form: 'single', intent: q ? 'find clarity about ' + q : '' }));
+    }
+    return this.composeParts(Object.assign({}, st, { form: 'two', f1: st.oF1, f2: st.oF2 }));
+  }
+
+  nightParts(st) {
+    return st.oSet ? this.oneParts(st) : this.composeParts(st);
   }
 
   composeParts(st) {
@@ -1907,9 +2138,9 @@ class Component extends DCLogic {
     this.stopSpeech();
     this.ambientOff(7);
     clearTimeout(this._dimT);
-    const p = s.practiced.slice();
-    p[s.night - 1] = true;
-    const upd = { aPhase: 'done', aPaused: false, practiced: p, lockDim: false, aSpan: null, aWait: false };
+    const upd = { aPhase: 'done', aPaused: false, lockDim: false, aSpan: null, aWait: false };
+    if (s.oSet) upd.oDone = true;
+    else { const p = s.practiced.slice(); p[s.night - 1] = true; upd.practiced = p; }
     if (s.aWhere === 'island') upd.island = 'flash';
     this.setState(upd);
     clearTimeout(this._doneT);
@@ -1995,7 +2226,7 @@ class Component extends DCLogic {
       { day: 27, answer: 'A little', text: 'Steadier. Less rehearsing in my head before I speak.' }
     ];
     const st = this.state;
-    const base = { banner: '', unlocking: false, speaking: false, breathing: false, privacyMsg: '', sheet: '', alert: false, tts: false, ttsSpan: null, ttsWait: false, holding: false, island: 'compact', islandPhase: 'bed', lockPhase: 'bed', mPhase: 'ask', mAnswer: '', backfillDone: false, reads: 0, note: '', dream: '', showDream: false, reh: 0, aOn: false, aPaused: false, lockDim: false, selMoon: 0, laOpen: false, playedTonight: false, aSpan: null, aWait: false, aSrc: '', previewing: '', cycle: 1, history: [], archived: 0, renew: '', resting: false, qMode: 'before' };
+    const base = { banner: '', unlocking: false, speaking: false, breathing: false, privacyMsg: '', sheet: '', alert: false, tts: false, ttsSpan: null, ttsWait: false, holding: false, island: 'compact', islandPhase: 'bed', lockPhase: 'bed', mPhase: 'ask', mAnswer: '', backfillDone: false, reads: 0, note: '', dream: '', showDream: false, reh: 0, aOn: false, aPaused: false, lockDim: false, selMoon: 0, laOpen: false, playedTonight: false, aSpan: null, aWait: false, aSrc: '', previewing: '', cycle: 1, history: [], archived: 0, renew: '', resting: false, qMode: 'before', oSet: false, oDone: false, oDreamed: '', oShift: '', oNote: '', trial: false, aside: [] };
     if (!st.setupDone) {
       Object.assign(base, { setupDone: true, adult: true, notifAllowed: true, liveOn: true, door: 'know', before: { w1: 2, w2: 2, w3: 1, w4: 1, w5: 2, sleep: 5, recall: 1 }, rate1: 7, rate2: 3 });
     }
@@ -2024,11 +2255,18 @@ class Component extends DCLogic {
         else extra = { screen: 'home', cycle: 2, history: [rec], archived: 0, night: 4, practiced: fill(3), notes: [], before: done30.after, rate1: 3, rate2: 8, after: {} };
       }
     }
+    else if (v === 'oneCompose') extra = { screen: 'oneStart', oFrom: 'home', night: 8, practiced: fill(7, [5]), notes: sample.slice(0, 2), oForm: 'clarity', oQ: '', oF1: '', oF2: '' };
+    else if (v === 'oneLock') extra = { screen: 'lock', oSet: true, oFrom: 'home', night: 8, practiced: fill(7, [5]), notes: sample.slice(0, 2), oForm: 'clarity', oQ: 'a decision I’m facing' };
+    else if (v === 'oneMorning') extra = { screen: 'morningLock', oSet: true, oDone: true, oFrom: 'home', night: 8, practiced: fill(7, [5]), notes: sample.slice(0, 2), oForm: 'clarity', oQ: 'a decision I’m facing' };
+    else if (v === 'oneTrial') {
+      this.setState(Object.assign(this.initialState(), { adult: true, trial: true, screen: 'oneStart', oFrom: 'trial' }));
+      return;
+    }
     else if (v === 'privacy') extra = { screen: 'privacy', returnTo: 'home' };
     else if (v === 'help') extra = { screen: 'help', returnTo: 'home' };
     const merged = Object.assign({}, base, extra);
     if (v === 'listen' || v === 'lockPlay') {
-      const chunks = this.composeParts(Object.assign({}, st, merged)).chunks;
+      const chunks = this.nightParts(Object.assign({}, st, merged)).chunks;
       this.setState(merged);
       this.startAudio(chunks, v === 'listen' ? 'app' : 'lock');
       return;
@@ -2042,7 +2280,7 @@ class Component extends DCLogic {
     const N = { text: '#B3A48C', text2: '#958772', title: '#E2CDA8', accent: '#C08A3E', onAccent: '#1A140C', glass: 'rgba(232,206,168,0.055)', line: 'rgba(232,206,168,0.13)', line2: 'rgba(232,206,168,0.32)', track: 'rgba(232,206,168,0.14)', selBg: 'rgba(192,138,62,0.16)', fade: 'linear-gradient(to top, #12100E 72%, rgba(18,16,14,0))', btn: 'linear-gradient(180deg, #CF9A55 0%, #B8803A 100%)', btnShadow: '0 12px 28px -12px rgba(192,138,62,0.6), inset 0 1px 0 rgba(255,236,200,0.35)' };
     const D = { text: '#2B2620', text2: '#6B6155', title: '#2B2620', accent: '#8C5E24', onAccent: '#FBF8F3', glass: 'rgba(255,255,255,0.6)', line: 'rgba(110,84,50,0.16)', line2: 'rgba(110,84,50,0.35)', track: '#E3DACB', selBg: '#EADBC4', fade: 'linear-gradient(to top, #F4EEE5 72%, rgba(244,238,229,0))', btn: 'linear-gradient(180deg, #9A6A2C 0%, #855820 100%)', btnShadow: '0 12px 28px -14px rgba(140,94,36,0.6), inset 0 1px 0 rgba(255,236,200,0.25)' };
 
-    const SCREENS = ['intro', 'welcome', 'beforeIntro', 'q', 'find', 'guided', 'clarify', 'rate', 'compose', 'seal', 'nights', 'lockSetup', 'ready', 'lock', 'homeScreen', 'tonight', 'listen', 'morningLock', 'note', 'morningDone', 'home', 'day30Invite', 'afterExtra', 'reveal', 'support', 'next', 'privacy', 'help', 'hard', 'pause', 'renew', 'cycleStart'];
+    const SCREENS = ['intro', 'welcome', 'beforeIntro', 'q', 'find', 'guided', 'clarify', 'rate', 'compose', 'seal', 'nights', 'lockSetup', 'ready', 'lock', 'homeScreen', 'tonight', 'listen', 'morningLock', 'note', 'morningDone', 'home', 'day30Invite', 'afterExtra', 'reveal', 'support', 'next', 'privacy', 'help', 'hard', 'pause', 'renew', 'cycleStart', 'oneStart', 'oneSet', 'oneMorning', 'oneInvite'];
     const on = {};
     SCREENS.forEach((k) => { on[k] = s.screen === k; });
     const afterMode = s.qMode === 'after';
@@ -2061,7 +2299,7 @@ class Component extends DCLogic {
       rate: afterMode ? 'day' : 'night', compose: 'night', seal: 'glow', nights: 'night', lockSetup: 'night', ready: 'glow',
       lock: 'lockNight', homeScreen: 'lockNight', tonight: 'glow', listen: 'dark', morningLock: 'lockDawn', note: 'dawn',
       morningDone: 'dawn', home: 'glow', day30Invite: 'day', afterExtra: 'day', reveal: 'day', support: 'day', next: 'day',
-      privacy: 'night', help: 'night', hard: 'dawn', pause: 'night', renew: 'glow', cycleStart: 'glow'
+      privacy: 'night', help: 'night', hard: 'dawn', pause: 'night', renew: 'glow', cycleStart: 'glow', oneStart: 'night', oneSet: 'glow', oneMorning: 'dawn', oneInvite: 'glow'
     };
     const shell = Object.assign({ stars: false, glowMoon: false, glowDawn: false, glowSun: false }, SH[shellFor[s.screen] || 'night']);
 
@@ -2087,14 +2325,19 @@ class Component extends DCLogic {
     const span = (a, b) => { const d = (b - a + 1440) % 1440; return Math.floor(d / 60) + ' h ' + (d % 60) + ' min'; };
     const count = s.practiced.filter(Boolean).length;
     const day = s.night;
-    const nightOf = 'Night ' + day + ' of 30';
+    const STAR = 'M60 14 C64.5 45 75 55.5 106 60 C75 64.5 64.5 75 60 106 C55.5 75 45 64.5 14 60 C45 55.5 55.5 45 60 14 Z';
+    const nightOf = s.oSet ? 'Tonight only' : 'Night ' + day + ' of 30';
     const tph = this.phaseOf(day);
-    const tonightD = this.moonD(tph.f, tph.waxing);
+    const tonightD = s.oSet ? STAR : this.moonD(tph.f, tph.waxing);
     const crescentD = this.moonD(0.18, true);
 
     const cp = this.composeParts(s);
     const twoPart = cp.twoPart;
     const statement = cp.statement;
+    const oneP = this.oneParts(s);
+    const np = s.oSet ? oneP : cp;
+    const noCycle = !!s.trial && !s.setupDone;
+    const cycleActive = !!s.setupDone && !s.resting && !noCycle;
 
     // Local suggestions
     const text = (s.issue + ' ' + s.cameUp).toLowerCase();
@@ -2262,7 +2505,7 @@ class Component extends DCLogic {
     const voiceName = myVoice ? 'your voice' : (s.voicePref === 'low' ? 'the low voice' : 'the soft voice');
     const voiceShort = myVoice ? 'Your voice' : (s.voicePref === 'low' ? 'Low voice' : 'Soft voice');
     let aTitle = three ? 'Reading ' + s.aPass + ' of 3' : 'Reading ' + s.aPass;
-    if (s.aPhase === 'done') aTitle = 'Night ' + day + ' is done. Sleep well.';
+    if (s.aPhase === 'done') aTitle = s.oSet ? 'Done for tonight. Sleep well.' : 'Night ' + day + ' is done. Sleep well.';
     else if (s.aPaused) aTitle = 'Paused';
     else if (s.aWait) aTitle = 'Preparing the voice';
     else if (s.aPhase === 'pause') aTitle = 'A quiet pause';
@@ -2288,12 +2531,12 @@ class Component extends DCLogic {
       npSegs.push({ bg: doneI ? '#D49A63' : (curI ? 'rgba(212,154,99,0.55)' : 'rgba(255,240,220,0.12)') });
     }
     let aStatus = three ? 'Reading ' + s.aPass + ' of 3 · ' + voiceShort : 'Reading ' + s.aPass + ' · ' + voiceShort;
-    if (s.aPhase === 'done') aStatus = 'Night ' + day + ' logged.';
+    if (s.aPhase === 'done') aStatus = s.oSet ? 'Done for tonight.' : 'Night ' + day + ' logged.';
     else if (s.aPaused) aStatus = 'Paused';
     else if (s.aWait) aStatus = prepLabel;
     else if (s.aPhase === 'pause') aStatus = 'A quiet pause';
-    const playLockNow = () => { self.unlockAudio(); self.faceThen(() => self.startAudio(cp.chunks, 'lock')); };
-    const playAppNow = () => { self.unlockAudio(); self.startAudio(cp.chunks, 'app'); };
+    const playLockNow = () => { self.unlockAudio(); self.faceThen(() => self.startAudio(np.chunks, 'lock')); };
+    const playAppNow = () => { self.unlockAudio(); self.startAudio(np.chunks, 'app'); };
     const lockPlaying = on.lock && s.aOn && s.aWhere === 'lock';
     const islandPlaying = s.aOn && s.aWhere === 'island' && s.aPhase !== 'done';
 
@@ -2324,9 +2567,10 @@ class Component extends DCLogic {
     let laText = 'Tonight in my dreams, I will…';
     let laHint = 'Unlock to read the rest, or play it.';
     if (s.privacy === 'hidden') { laText = 'Your intention is ready.'; laHint = 'Unlock to read it, or play it.'; }
-    else if (s.privacy === 'full' && statement) { laText = statement; laHint = 'Read it slowly three times, or play it.'; }
+    else if (s.privacy === 'full' && np.statement) { laText = np.statement; laHint = 'Read it slowly three times, or play it.'; }
     const lockNightTime = (s.bedtime + 6) % 1440;
     const markNight = () => { const p = s.practiced.slice(); p[day - 1] = true; return p; };
+    const markTonight = () => (s.oSet ? { oDone: true } : { practiced: markNight() });
     const openTonight = () => {
       if (on.homeScreen) { self.setState({ island: 'compact', screen: 'tonight', reads: 0, returnTo: 'lock' }); return; }
       self.faceThen(() => self.setState({ screen: 'tonight', reads: 0, returnTo: 'lock' }));
@@ -2334,7 +2578,7 @@ class Component extends DCLogic {
     const islandBedPhase = s.islandPhase === 'bed';
 
     // Tonight
-    const plainLines = cp.lines.map((ln) => ({ text: ln.text, color: ln.slot ? '#E6C48F' : '#BCAC91' }));
+    const plainLines = np.lines.map((ln) => ({ text: ln.text, color: ln.slot ? '#E6C48F' : '#BCAC91' }));
     const readDots = [0, 1, 2].map((i) => {
       const done = s.reads > i;
       return {
@@ -2347,9 +2591,12 @@ class Component extends DCLogic {
           if (self.state.reads !== i) return;
           const n = i + 1;
           if (n >= 3) {
-            const p = self.state.practiced.slice();
-            p[self.state.night - 1] = true;
-            self.setState({ reads: 3, practiced: p });
+            if (self.state.oSet) self.setState({ reads: 3, oDone: true });
+            else {
+              const p = self.state.practiced.slice();
+              p[self.state.night - 1] = true;
+              self.setState({ reads: 3, practiced: p });
+            }
             clearTimeout(self._tonightT);
             self._tonightT = setTimeout(() => self.setState({ screen: 'lock', lockPhase: 'night' }), 1700);
           } else {
@@ -2358,7 +2605,7 @@ class Component extends DCLogic {
         }
       };
     });
-    const readsLabel = s.reads >= 3 ? 'Night ' + day + ' is done. Sleep well.' : (s.reads === 0 ? '' : plural(s.reads, 'reading') + ' so far');
+    const readsLabel = s.reads >= 3 ? (s.oSet ? 'Done for tonight. Sleep well.' : 'Night ' + day + ' is done. Sleep well.') : (s.reads === 0 ? '' : plural(s.reads, 'reading') + ' so far');
 
     // Morning
     const NOTES = {
@@ -2370,7 +2617,7 @@ class Component extends DCLogic {
     };
     const isWeekly = day === 7 || day === 14 || day === 21;
     const weeklyVal = s.weekly[day] != null ? s.weekly[day] : 5;
-    const needBackfill = !s.practiced[day - 1] && !s.backfillDone;
+    const needBackfill = !s.oSet && !s.practiced[day - 1] && !s.backfillDone;
     const SAMPLE = 'Woke up lighter than usual. My shoulders feel less tight, and I’m less braced for the day.';
     const nextNight = day >= 30 ? go('day30Invite', { unlocking: false }) : go('home', { night: day + 1, mPhase: 'ask', backfillDone: false, selMoon: 0, playedTonight: false });
 
@@ -2378,24 +2625,27 @@ class Component extends DCLogic {
     const noteFor = (n) => s.notes.filter((x) => x.day === n).slice(-1)[0];
     const moons = [];
     const moonsDay = [];
+    const asideNights = s.aside.concat(s.oSet && cycleActive ? [day] : []);
     for (let n = 1; n <= 30; n++) {
       const ph = this.phaseOf(n);
-      const d = this.moonD(Math.max(ph.f, 0.06), ph.waxing);
+      const isAside = asideNights.indexOf(n) >= 0 && !s.practiced[n - 1];
+      const d = isAside ? STAR : this.moonD(Math.max(ph.f, 0.06), ph.waxing);
       const done = s.practiced[n - 1];
-      const tonight = n === day && !done;
-      const missed = n < day && !done;
+      const tonight = n === day && !done && !isAside;
+      const missed = n < day && !done && !isAside;
       const sel = s.selMoon === n;
       let m;
       if (done) m = { fill: '#E6BC7A', shadow: '#2A231C', stroke: 'rgba(232,206,168,0.18)', glow: 'drop-shadow(0 0 6px rgba(226,178,110,0.55))', numColor: '#DCC9A6', state: 'practiced' };
+      else if (isAside) m = { fill: '#D9AE70', shadow: '#221D18', stroke: 'rgba(212,154,99,0.35)', glow: 'drop-shadow(0 0 4px rgba(226,178,110,0.4))', numColor: '#CDB48C', state: 'aside' };
       else if (tonight) m = { fill: 'rgba(230,188,122,0.5)', shadow: '#221D18', stroke: 'rgba(212,154,99,0.55)', glow: 'none', numColor: '#E6C48F', state: 'tonight' };
       else if (missed) m = { fill: 'rgba(232,206,168,0.12)', shadow: '#1A1612', stroke: 'rgba(232,206,168,0.16)', glow: 'none', numColor: '#8E806B', state: 'missed' };
       else m = { fill: 'rgba(232,206,168,0.26)', shadow: '#1C1814', stroke: 'rgba(232,206,168,0.12)', glow: 'none', numColor: '#8E806B', state: 'ahead' };
-      const labelState = { practiced: 'practiced', tonight: 'tonight', missed: 'missed', ahead: 'still ahead' }[m.state];
+      const labelState = { practiced: 'practiced', tonight: 'tonight', missed: 'missed', ahead: 'still ahead', aside: 'set aside for a one-night intention' }[m.state];
       moons.push(Object.assign(m, {
         n: String(n), d: d, selected: sel,
         aria: 'Night ' + n + ', ' + labelState,
         bg: sel ? 'rgba(232,206,168,0.09)' : 'transparent',
-        border: tonight ? '1px solid rgba(212,154,99,0.45)' : (sel ? '1px solid rgba(232,206,168,0.2)' : '1px solid transparent'),
+        border: (tonight || (isAside && n === day)) ? '1px solid rgba(212,154,99,0.45)' : (sel ? '1px solid rgba(232,206,168,0.2)' : '1px solid transparent'),
         pick: () => self.setState({ selMoon: self.state.selMoon === n ? 0 : n })
       }));
       moonsDay.push(done
@@ -2407,7 +2657,8 @@ class Component extends DCLogic {
     if (s.selMoon) {
       const n = s.selMoon;
       const nn = noteFor(n);
-      if (s.practiced[n - 1]) { selHead = 'Night ' + n + ' · practiced'; selBody = nn ? nn.answer + '. “' + nn.text + '”' : 'No morning note. Practicing is enough.'; }
+      if (asideNights.indexOf(n) >= 0 && !s.practiced[n - 1]) { selHead = 'Night ' + n + ' · set aside'; selBody = n === day ? 'Tonight belongs to a one-night intention. Your cycle picks up again tomorrow.' : 'Used for a one-night intention. It doesn’t count as missed.'; }
+      else if (s.practiced[n - 1]) { selHead = 'Night ' + n + ' · practiced'; selBody = nn ? nn.answer + '. “' + nn.text + '”' : 'No morning note. Practicing is enough.'; }
       else if (n === day) { selHead = 'Night ' + n + ' · tonight'; selBody = 'Your statement arrives at ' + fmt(s.bedtime) + '.'; }
       else if (n < day) { selHead = 'Night ' + n + ' · missed'; selBody = 'A missed night costs nothing. The cycle simply continues.'; }
       else { selHead = 'Night ' + n + ' · still ahead'; selBody = 'This moon is waiting for you.'; }
@@ -2430,7 +2681,7 @@ class Component extends DCLogic {
     const FULLPLAY = 'M7 4.5v15l13-7.5z';
     const REPLAY = 'M4.5 12a7.5 7.5 0 1 0 2.2-5.3M4.5 4.5v4h4';
     const lockAudio = s.aOn && s.aWhere === 'lock' && s.aPhase !== 'done';
-    const tonightDone = !!s.practiced[day - 1];
+    const tonightDone = s.oSet ? !!s.oDone : !!s.practiced[day - 1];
     let fullIcon = FULLPLAY;
     let fullIconFill = 'currentColor';
     let fullIconStroke = 'none';
@@ -2440,7 +2691,7 @@ class Component extends DCLogic {
     if (lockAudio && !s.aPaused) { fullIcon = PAUSE; fullIconNudge = '0px'; fullPlayLabel = 'Pause'; fullPlayAria = 'Pause'; }
     else if (lockAudio && s.aPaused) { fullPlayLabel = 'Resume'; fullPlayAria = 'Resume'; }
     else if (s.playedTonight) { fullIcon = REPLAY; fullIconFill = 'none'; fullIconStroke = 'currentColor'; fullIconNudge = '0px'; fullPlayLabel = 'Play again'; fullPlayAria = 'Play statement audio again'; }
-    const fullLines = cp.lines.map((ln, li) => {
+    const fullLines = np.lines.map((ln, li) => {
       const active = lockAudio && !s.aPaused && s.aPhase === 'reading' && inSpan(s.aSpan, li);
       return { text: ln.text, color: active ? '#F6DCAA' : (ln.slot ? '#E6C48F' : '#CDBDA2') };
     });
@@ -2455,6 +2706,120 @@ class Component extends DCLogic {
         y: (160 + 146 * Math.sin(ang) - 7).toFixed(1)
       });
     }
+
+
+    // One-night intentions: for something that comes up, without changing the thirty-night practice
+    const O_A = ['the tension I’m carrying from today', 'the feeling a conversation left me with', 'what’s been weighing on me'];
+    const O_B = ['calm and at ease', 'light and free', 'clear and confident'];
+    const O_Q = ['a decision I’m facing', 'what to say to someone I care about', 'a creative problem I’m stuck on', 'what comes next for me', 'a worry that came up today'];
+    const oChips = (xs, key) => xs.map((label) => {
+      const sel = s[key] === label;
+      return { label: label, selected: sel, pick: () => { const o = {}; o[key] = label; self.setState(o); }, bg: sel ? N.selBg : N.glass, border: sel ? '1.5px solid ' + N.accent : '1px solid ' + N.line };
+    });
+    const oneFeel = s.oForm !== 'clarity';
+    const onePreview = oneP.lines.map((ln) => {
+      const empty = ln.slot && !ln.text;
+      const ph = oneFeel ? ln.ph : 'what you’d like clarity about';
+      const text = empty ? (oneFeel ? ph : 'find clarity about …') : ln.text;
+      return { text: text, color: empty ? 'rgba(230,196,143,0.4)' : (ln.slot ? '#E6C48F' : '#BCAC91'), italic: empty ? 'italic' : 'normal' };
+    });
+    const DREAM_LABEL = { yes: 'Showed up in a dream', maybe: 'Maybe in a dream', no: 'No dream recalled' };
+    const oneCards = s.oneLog.slice().reverse().slice(0, 4).map((e) => ({
+      statement: e.statement, chip1: DREAM_LABEL[e.dreamed] || 'Practiced', chip2: e.shift || '', hasChip2: !!e.shift, note: e.note ? '“' + e.note + '”' : '', hasNote: !!e.note
+    }));
+    const oneCarry = () => (s.oForm === 'clarity'
+      ? { form: 'single', intent: 'find clarity about ' + String(s.oQ || '').trim(), f1: '', f2: '' }
+      : { form: 'two', f1: s.oF1, f2: s.oF2, intent: '' });
+    const oneLogged = () => ({
+      oneLog: s.oneLog.concat([{ statement: oneP.statement, form: s.oForm, dreamed: s.oDreamed, shift: s.oShift, note: String(s.oNote || '').trim() }]),
+      oSet: false, oDone: false, mPhase: 'ask', backfillDone: false, playedTonight: false, lockPhase: 'bed', reads: 0
+    });
+    const canConvert = noCycle || !!s.resting;
+    const dawnOpt = (sel) => ({ bg: sel ? 'rgba(221,165,110,0.22)' : 'rgba(240,214,180,0.07)', border: sel ? '1.5px solid #DDA56E' : '1px solid rgba(240,214,180,0.18)', color: sel ? '#F3E1C4' : '#DCCBB1' });
+    const shiftOpts = ['Clearer', 'About the same', 'Not sure yet'].map((label) => Object.assign({ label: label, selected: s.oShift === label, pick: set({ oShift: label }) }, dawnOpt(s.oShift === label)));
+    const oneValues = {
+      oneFeel: oneFeel,
+      oneClarity: !oneFeel,
+      oneTabs: [['feel', 'Ease a feeling'], ['clarity', 'Find clarity']].map((x) => {
+        const sel = (s.oForm === 'clarity') === (x[0] === 'clarity');
+        return { label: x[1], selected: sel, bg: sel ? '#C08A3E' : 'transparent', color: sel ? '#1A140C' : '#B3A48C', pick: set({ oForm: x[0] }) };
+      }),
+      oF1: s.oF1, oF2: s.oF2, oQ: s.oQ,
+      onOF1: val('oF1'), onOF2: val('oF2'), onOQ: val('oQ'),
+      oChipsA: oChips(O_A, 'oF1'), oChipsB: oChips(O_B, 'oF2'), oChipsQ: oChips(O_Q, 'oQ'),
+      onePreview: onePreview,
+      oneLead: cycleActive ? 'For something that came up today. Your cycle statement rests for tonight and picks up again tomorrow.' : 'For something that came up today. One night, one intention.',
+      oneReady: oneP.filled,
+      oneSetOpacity: oneP.filled ? 1 : 0.45,
+      oneNotReady: !oneP.filled,
+      oneBack: s.oFrom === 'trial' ? go('welcome') : go('home'),
+      startOne: () => {
+        self.stopSpeech();
+        if (self.state.oSet) self.setState({ screen: 'oneStart', oFrom: noCycle ? 'trial' : 'home' });
+        else self.setState({ screen: 'oneStart', oFrom: noCycle ? 'trial' : 'home', oForm: 'feel', oF1: '', oF2: '', oQ: '' });
+      },
+      setOne: () => {
+        if (!oneP.filled) return;
+        self.stopSpeech();
+        self.setState({ oSet: true, oDone: false, screen: 'oneSet', lockPhase: 'bed', playedTonight: false, mPhase: 'ask', reads: 0, oDreamed: '', oShift: '', oNote: '', selMoon: 0 });
+      },
+      oneStatementLines: oneP.lines.map((ln) => ({ text: ln.text, color: ln.slot ? '#E6C48F' : '#CDBDA2' })),
+      oneSetLead: 'At ' + fmt(s.bedtime) + ', it appears on your Lock Screen. Read it slowly three times, or tap play and let it be read to you.',
+      oneSetNote: cycleActive ? 'Night ' + day + ' of your cycle is set aside, so it won’t count as missed. Your cycle picks up again tomorrow.' : 'In the morning, one quick question: did it show up?',
+      onePreviewNight: go('lock', { lockPhase: 'bed' }),
+      oneEdit: go('oneStart'),
+      cancelOne: () => { self.stopSpeech(); self.setState({ oSet: false, oDone: false, selMoon: 0 }); },
+      oneCancelLabel: cycleActive ? 'Back to my cycle' : 'Cancel tonight',
+      tonightIdle: !s.oSet,
+      tonightSet: !!s.oSet,
+      oneCardTitle: noCycle ? 'Set an intention for tonight' : 'Something on your mind tonight?',
+      oneCardBody: noCycle ? 'One night, one intention. Ease a feeling, or ask for clarity about something that came up.' : 'Set a one-night intention for whatever came up today. It takes a minute.',
+      oneCardSetBody: cycleActive ? 'Tonight belongs to your one-night intention. Your cycle picks up again tomorrow.' : 'Want different words, or not tonight after all?',
+      oneAnsNo: () => self.faceThen(() => self.setState({ screen: 'oneMorning', oDreamed: 'no', oShift: '', oNote: '' })),
+      oneAnsMaybe: () => self.faceThen(() => self.setState({ screen: 'oneMorning', oDreamed: 'maybe', oShift: '', oNote: '' })),
+      oneAnsYes: () => self.faceThen(() => self.setState({ screen: 'oneMorning', oDreamed: 'yes', oShift: '', oNote: '' })),
+      oneMorningBack: go('morningLock', { mPhase: 'ask' }),
+      oneMorningKicker: DREAM_LABEL[s.oDreamed] || 'The morning after',
+      shiftOpts: shiftOpts,
+      oNote: s.oNote,
+      onONote: val('oNote'),
+      oneDreamedYes: s.oDreamed === 'yes' || s.oDreamed === 'maybe',
+      oneShowDeeper: !!s.oShift && s.oShift !== 'Clearer',
+      oneDeeperText: canConvert ? 'If this keeps coming up, a thirty-night cycle gives it room to work.' : 'If this keeps coming up, it could be the focus of your next cycle.',
+      oneCanConvert: canConvert,
+      oneConvertLabel: noCycle ? 'Begin thirty nights with this' : 'Make this my next cycle',
+      oneStatementQuote: oneP.statement,
+      oneSave: () => {
+        const upd = oneLogged();
+        if (cycleActive) {
+          upd.aside = s.aside.concat([day]);
+          if (day >= 30) upd.screen = 'day30Invite';
+          else { upd.night = day + 1; upd.screen = 'home'; upd.selMoon = 0; }
+        } else if (noCycle && s.oneLog.length === 0) upd.screen = 'oneInvite';
+        else upd.screen = 'home';
+        self.setState(upd);
+      },
+      oneConvert: () => {
+        const upd = Object.assign(oneLogged(), oneCarry());
+        if (noCycle) Object.assign(upd, { screen: 'beforeIntro', qMode: 'before', qIndex: 0, door: 'know' });
+        else Object.assign(upd, { renew: 'new', renewPick: 'new', screen: 'rate', door: 'know', rate1: 5, rate2: 5, sealed: false, reh: 0, qMode: 'before', sheet: '' });
+        if (!noCycle) self.archiveCycle();
+        self.setState(upd);
+      },
+      oneInviteBegin: () => self.setState(Object.assign(oneCarry(), { screen: 'beforeIntro', qMode: 'before', qIndex: 0, door: 'know' })),
+      oneInviteLater: go('home'),
+      noCycle: noCycle,
+      hasCycleHero: !s.resting && !noCycle,
+      showCycleCards: !noCycle,
+      showStatementCard: !noCycle || !!s.oSet,
+      canPause: !s.resting && !noCycle,
+      noCycleSub: s.oSet ? 'A one-night intention is set' : (s.oneLog.length ? (s.oneLog.length === 1 ? 'One night so far' : s.oneLog.length + ' nights so far') : 'Set an intention for a single night, or begin the full practice.'),
+      beginPractice: () => self.setState({ screen: 'beforeIntro', qMode: 'before', qIndex: 0 }),
+      hasOneLog: oneCards.length > 0,
+      oneCards: oneCards,
+      tryOne: () => { if (s.adult) self.setState({ trial: true, screen: 'oneStart', oFrom: 'trial', oForm: 'feel', oF1: '', oF2: '', oQ: '' }); },
+      starD: STAR
+    };
 
     // Cycles: looking back, choosing what comes next, and starting again
     const ringOf = (lits, R0, box, size) => {
@@ -2500,7 +2865,7 @@ class Component extends DCLogic {
     const resting = !!s.resting && on.home;
     const homeRing = ringOf(s.practiced, 96, 210, 13);
 
-    return {
+    return Object.assign(oneValues, {
       on: on,
       shell: shell,
       stars: this._stars,
@@ -2523,7 +2888,7 @@ class Component extends DCLogic {
         const active = st.aOn && st.aWhere === 'lock' && st.aPhase !== 'done';
         if (active && !st.aPaused) self.pauseAudio();
         else if (active && st.aPaused) self.resumeAudio();
-        else { self.unlockAudio(); self.startAudio(cp.chunks, 'lock', { laOpen: true }); }
+        else { self.unlockAudio(); self.startAudio(np.chunks, 'lock', { laOpen: true }); }
       },
       fullPlayAria: fullPlayAria,
       fullIcon: fullIcon,
@@ -2532,7 +2897,11 @@ class Component extends DCLogic {
       fullIconNudge: fullIconNudge,
       fullPlayLabel: fullPlayLabel,
       tonightDone: tonightDone,
-      fullDone: () => { if (!self.state.practiced[self.state.night - 1]) { const p = self.state.practiced.slice(); p[self.state.night - 1] = true; self.setState({ practiced: p, lockPhase: 'night' }); } },
+      fullDone: () => {
+        const st = self.state;
+        if (st.oSet) { if (!st.oDone) self.setState({ oDone: true, lockPhase: 'night' }); return; }
+        if (!st.practiced[st.night - 1]) { const p = st.practiced.slice(); p[st.night - 1] = true; self.setState({ practiced: p, lockPhase: 'night' }); }
+      },
       fullDoneStyle: tonightDone ? { bg: 'rgba(192,138,62,0.14)', border: '1.5px solid rgba(212,154,99,0.6)', color: '#E6C48F' } : { bg: 'linear-gradient(180deg, #CF9A55 0%, #B8803A 100%)', border: 'none', color: '#1A140C' },
       fullDoneLabel: tonightDone ? 'Done for tonight' : 'Done',
       phaseRow: phaseRow,
@@ -2540,7 +2909,7 @@ class Component extends DCLogic {
       tonightD: tonightD,
       nightOf: nightOf,
       statement: statement,
-      statementOrPh: statement || 'Your statement appears here once it’s written.',
+      statementOrPh: np.statement || 'Your statement appears here once it’s written.',
 
       adult: s.adult,
       adultSw: sw(s.adult),
@@ -2730,7 +3099,7 @@ class Component extends DCLogic {
 
       lockClock: clock(s.lockPhase === 'night' ? lockNightTime : (lockPlaying ? (s.bedtime + 1) % 1440 : s.bedtime)),
       lockWidgetOn: !lockPlaying,
-      widgetSub: s.lockPhase === 'night' ? 'Done · sleep well' : 'Tonight’s intention',
+      widgetSub: s.lockPhase === 'night' ? 'Done · sleep well' : (s.oSet ? 'A one-night intention' : 'Tonight’s intention'),
       chipHome: s.lockPhase !== 'night' && !lockPlaying,
       npShow: lockPlaying,
       laBed: s.lockPhase !== 'night' && !lockPlaying,
@@ -2741,8 +3110,8 @@ class Component extends DCLogic {
       openTonight: openTonight,
       playLock: playLockNow,
       playApp: playAppNow,
-      playIsland: () => { self.unlockAudio(); self.startAudio(cp.chunks, 'island', { island: 'expanded' }); },
-      markDone: () => self.faceThen(() => self.setState({ practiced: markNight(), lockPhase: 'night' })),
+      playIsland: () => { self.unlockAudio(); self.startAudio(np.chunks, 'island', { island: 'expanded' }); },
+      markDone: () => self.faceThen(() => self.setState(Object.assign({ lockPhase: 'night' }, markTonight()))),
       npSub: (s.aPaused ? 'Paused' : (s.aWait ? 'Preparing the voice' : (three ? 'Reading ' + s.aPass + ' of 3' : 'Reading ' + s.aPass))) + ' · ' + voiceShort,
       npSegs: npSegs,
       npIcon: s.aPaused ? PLAY : PAUSE,
@@ -2761,7 +3130,7 @@ class Component extends DCLogic {
       aDone: s.aPhase === 'done',
       lockDimOn: s.lockDim && lockPlaying && !s.laOpen,
       wakeScreen: set({ lockDim: false }),
-      nightDoneShort: 'Night ' + day + ' · done',
+      nightDoneShort: s.oSet ? 'Tonight only · done' : 'Night ' + day + ' · done',
       morningAt: 'Morning check-in · ' + fmt(s.wake),
       untilWake: 'in ' + span(lockNightTime, s.wake),
       toHomeScreen: go('homeScreen', { island: 'compact', islandPhase: 'bed' }),
@@ -2787,7 +3156,7 @@ class Component extends DCLogic {
       expandIsland: set({ island: 'expanded' }),
       collapseIsland: set({ island: 'compact' }),
       islandDone: () => {
-        self.setState({ island: 'flash', practiced: markNight() });
+        self.setState(Object.assign({ island: 'flash' }, markTonight()));
         clearTimeout(self._flashT);
         self._flashT = setTimeout(() => self.setState({ island: 'compact', islandPhase: 'night' }), 1700);
       },
@@ -2801,7 +3170,7 @@ class Component extends DCLogic {
 
       listenTop: s.aPhase === 'done' ? 'Your practice is done' : 'Close your eyes',
       stopListen: () => { self.stopAudio(); self.setState({ screen: s.returnTo === 'home' ? 'home' : 'tonight' }); },
-      nightDoneTitle: 'Night ' + day + ' is done.',
+      nightDoneTitle: s.oSet ? 'Done for tonight.' : 'Night ' + day + ' is done.',
       toNightLock: go('lock', { lockPhase: 'night', aOn: false }),
       voiceChip: !s.aVoice ? 'Prototype: audio isn’t available here, so the readings are timed' : (s.aSrc === 'device' ? 'Prototype: your device’s voice stands in while the calm voice can’t load' : 'Prototype: the soft voice stands in for your recording'),
       voiceChipShow: !s.aVoice || s.aSrc === 'device' || myVoice,
@@ -2817,9 +3186,10 @@ class Component extends DCLogic {
       },
 
       wakeClock: clock(s.wake),
-      nightShort: 'Night ' + day,
+      nightShort: s.oSet ? 'Tonight only' : 'Night ' + day,
       laBackfill: needBackfill && s.mPhase === 'ask',
-      laAsk: !needBackfill && s.mPhase === 'ask',
+      laAsk: !s.oSet && !needBackfill && s.mPhase === 'ask',
+      laOneAsk: s.oSet && s.mPhase === 'ask',
       laThanks: s.mPhase === 'thanks',
       thanksSub: 'Night ' + day + ' logged. See you tonight.',
       backfillYes: () => self.faceThen(() => self.setState({ practiced: markNight(), backfillDone: true })),
@@ -2881,11 +3251,11 @@ class Component extends DCLogic {
       bannerAction: set({ banner: '' }),
       resting: resting,
       notResting: !resting,
-      helpBorder: resting ? 'none' : '1px solid rgba(232,206,168,0.08)',
+      helpBorder: (resting || noCycle) ? 'none' : '1px solid rgba(232,206,168,0.08)',
       homeRing: homeRing,
       restKicker: 'Cycle ' + s.cycle + ' complete',
       restSub: count + ' of 30 moons lit',
-      statementLabel: resting ? 'Cycle ' + s.cycle + ' statement' : 'Your statement',
+      statementLabel: s.oSet ? 'Tonight’s intention' : (resting ? 'Cycle ' + s.cycle + ' statement' : 'Your statement'),
       moonsLabel: resting ? 'Cycle ' + s.cycle + ' · thirty moons' : 'Your thirty moons',
       cycleChip: s.cycle > 1 && !resting ? 'Cycle ' + s.cycle : '',
       hasCycleChip: s.cycle > 1 && !resting,
@@ -2926,7 +3296,7 @@ class Component extends DCLogic {
       beginCycleNow: () => self.beginCycle(),
       startCta: 'Begin cycle ' + nextCycle,
       readyKicker: s.cycle > 1 ? 'The first moon of cycle ' + s.cycle : 'The first moon of your cycle',
-      homeSub: count === 0 ? (s.cycle > 1 ? 'A fresh cycle of the moon' : 'Your first moon') : plural(count, 'night') + ' practiced so far',
+      homeSub: s.oSet ? (cycleActive ? 'Night ' + day + ' of 30 is set aside' : 'A one-night intention') : count === 0 ? (s.cycle > 1 ? 'A fresh cycle of the moon' : 'Your first moon') : plural(count, 'night') + ' practiced so far',
       moonsCount: count + ' of 30 lit',
       moons: moons,
       moonsDay: moonsDay,
@@ -3006,7 +3376,7 @@ class Component extends DCLogic {
       endWithout: go('next', { gave: false }),
 
       unlocking: s.unlocking
-    };
+    });
   }
 }
 </script>
