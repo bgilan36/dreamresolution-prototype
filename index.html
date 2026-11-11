@@ -50,6 +50,7 @@ input.dr-range::-moz-range-thumb{width:30px;height:30px;border-radius:15px;backg
 input.dr-range::-moz-range-track{background:transparent}
 input.dr-range-day::-webkit-slider-thumb{background:#FBF8F3;box-shadow:0 1px 6px rgba(60,40,20,0.35)}
 input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
+@keyframes dr-mark{0%{opacity:0;transform:scale(0.3)}60%{opacity:1;transform:scale(1.22)}100%{opacity:1;transform:none}}
 @keyframes dr-enter{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .dr-enter{animation:dr-enter 250ms ease-out both}
 @keyframes dr-pop{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:none}}
@@ -70,7 +71,7 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 .dr-halo{animation:dr-halo 10s ease-in-out infinite}
 @keyframes dr-shoot{0%{opacity:0;transform:translate(0,0) rotate(-24deg)}2%{opacity:1}8%{opacity:0;transform:translate(-230px,102px) rotate(-24deg)}100%{opacity:0;transform:translate(-230px,102px) rotate(-24deg)}}
 .dr-shoot{animation:dr-shoot 12s ease-out 3s infinite}
-@media (prefers-reduced-motion: reduce){.dr-anim,.dr-enter,.dr-pop,.dr-twinkle,.dr-pulse,.dr-float,.dr-rise,.dr-orbit,.dr-halo{animation:none !important}.dr-shoot{display:none}}
+@media (prefers-reduced-motion: reduce){.dr-anim,.dr-enter,.dr-pop,.dr-twinkle,.dr-pulse,.dr-float,.dr-rise,.dr-orbit,.dr-halo,.dr-mk{animation:none !important}.dr-shoot{display:none}}
 </style>
 </helmet>
 <div style="width: 393px; height: 904px; display: flex; flex-direction: column; background: #0A0908; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, Roboto, 'Segoe UI', sans-serif;">
@@ -90,7 +91,7 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 <option value="lockNight">Overnight · Lock Screen</option>
 <option value="morning">Morning · Lock Screen</option>
 <option value="morning14">Morning 14 · missed tap</option>
-<option value="home">Home · your thirty moons</option>
+<option value="home">Home · your thirty nights</option>
 <option value="hard">A hard morning</option>
 <option value="day30">Night 30 · results</option>
 <option value="cycleNext">Night 30 · begin cycle 2</option>
@@ -147,20 +148,20 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 </sc-if>
 
 <sc-if value="{{ on.welcome }}" hint-placeholder-val="{{ false }}">
-<div class="dr-enter" style="min-height: 852px; box-sizing: border-box; padding-top: 64px; display: flex; flex-direction: column;">
-<div aria-hidden="true" style="position: relative; height: 196px; flex: none; display: flex; flex-direction: column; align-items: center;">
-<div style="position: absolute; left: 98.5px; top: 0; width: 196px; height: 196px; box-sizing: border-box; border-radius: 50%; border: 1px solid rgba(232,206,168,0.09);"></div>
-<div style="position: absolute; left: 126.5px; top: 28px; width: 140px; height: 140px; box-sizing: border-box; border-radius: 50%; border: 1px solid rgba(232,206,168,0.06);"></div>
-<svg class="dr-float" viewBox="0 0 120 120" width="108" height="108" style="position: relative; margin-top: 44px; filter: drop-shadow(0 0 30px rgba(222,186,130,0.38));"><defs><radialGradient id="drWelcomeMoon" cx="62%" cy="38%" r="70%"><stop offset="0%" style="stop-color: #F2DAAE;"></stop><stop offset="100%" style="stop-color: #C8995A;"></stop></radialGradient></defs><circle cx="60" cy="60" r="52" fill="#1F1A15" stroke="rgba(232,206,168,0.14)" style="stroke-width: 1;"></circle><path d="{{ welcomeMoon }}" fill="url(#drWelcomeMoon)"></path></svg>
+<div class="dr-enter" style="min-height: 852px; box-sizing: border-box; padding-top: 58px; display: flex; flex-direction: column;">
+<div aria-hidden="true" style="position: relative; height: 156px; flex: none; display: flex; flex-direction: column; align-items: center;">
+<div style="position: absolute; left: 118.5px; top: 0; width: 156px; height: 156px; box-sizing: border-box; border-radius: 50%; border: 1px solid rgba(232,206,168,0.09);"></div>
+<div style="position: absolute; left: 140.5px; top: 22px; width: 112px; height: 112px; box-sizing: border-box; border-radius: 50%; border: 1px solid rgba(232,206,168,0.06);"></div>
+<svg class="dr-float" viewBox="0 0 120 120" width="88" height="88" style="position: relative; margin-top: 34px; filter: drop-shadow(0 0 30px rgba(222,186,130,0.38));"><defs><radialGradient id="drWelcomeMoon" cx="62%" cy="38%" r="70%"><stop offset="0%" style="stop-color: #F2DAAE;"></stop><stop offset="100%" style="stop-color: #C8995A;"></stop></radialGradient></defs><circle cx="60" cy="60" r="52" fill="#1F1A15" stroke="rgba(232,206,168,0.14)" style="stroke-width: 1;"></circle><path d="{{ welcomeMoon }}" fill="url(#drWelcomeMoon)"></path></svg>
 </div>
 <div style="padding: 22px 28px 0; display: flex; flex-direction: column; gap: 12px;">
-<span style="font-size: 15px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #8E806B;">DreamResolution</span>
-<h1 style="margin: 0; font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 42px; font-weight: 400; line-height: 1.06; letter-spacing: -0.6px; color: #E2CDA8;"><span style="display: block;">Thirty nights.</span><span style="display: block;">One intention.</span></h1>
-<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #A3937B;">Each night, a short statement as you drift off. Each morning, a moment to notice how you feel. One cycle of the moon.</p>
+<span style="font-size: 15px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #8E806B;">The idea</span>
+<h1 style="margin: 0; font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 36px; font-weight: 400; line-height: 1.1; letter-spacing: -0.5px; color: #E2CDA8; text-wrap: balance;">Each night, a message to your unconscious.</h1>
+<p style="margin: 0; font-size: 17px; line-height: 1.5; color: #A3937B;">As you fall asleep, you repeat one short intention. Night after night, your unconscious begins working to resolve the issue on inner levels.</p>
 </div>
 <ul style="margin: 20px 0 0; padding: 0 28px; list-style: none; display: flex; flex-direction: column; gap: 12px;">
 <li style="display: flex; gap: 12px; align-items: center; font-size: 17px; line-height: 1.3; color: #BDAE95;"><span aria-hidden="true" style="width: 32px; height: 32px; flex: none; border-radius: 16px; background: rgba(232,206,168,0.07); border: 1px solid rgba(232,206,168,0.12); display: flex; align-items: center; justify-content: center; color: #D49A63;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" style="stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round;"><path d="M12 3l1.8 6.2L20 11l-6.2 1.8L12 19l-1.8-6.2L4 11l6.2-1.8z"></path></svg></span><span>No need to remember your dreams</span></li>
-<li style="display: flex; gap: 12px; align-items: center; font-size: 17px; line-height: 1.3; color: #BDAE95;"><span aria-hidden="true" style="width: 32px; height: 32px; flex: none; border-radius: 16px; background: rgba(232,206,168,0.07); border: 1px solid rgba(232,206,168,0.12); display: flex; align-items: center; justify-content: center; color: #D49A63;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" style="stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round;"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"></path><path d="M15.5 9a4 4 0 0 1 0 6"></path></svg></span><span>One minute at bedtime</span></li>
+<li style="display: flex; gap: 12px; align-items: center; font-size: 17px; line-height: 1.3; color: #BDAE95;"><span aria-hidden="true" style="width: 32px; height: 32px; flex: none; border-radius: 16px; background: rgba(232,206,168,0.07); border: 1px solid rgba(232,206,168,0.12); display: flex; align-items: center; justify-content: center; color: #D49A63;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" style="stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round;"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"></path><path d="M15.5 9a4 4 0 0 1 0 6"></path></svg></span><span>One minute a night, for thirty nights</span></li>
 <li style="display: flex; gap: 12px; align-items: center; font-size: 17px; line-height: 1.3; color: #BDAE95;"><span aria-hidden="true" style="width: 32px; height: 32px; flex: none; border-radius: 16px; background: rgba(232,206,168,0.07); border: 1px solid rgba(232,206,168,0.12); display: flex; align-items: center; justify-content: center; color: #D49A63;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" style="stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round;"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg></span><span>Nothing leaves your phone</span></li>
 </ul>
 <div style="position: sticky; bottom: 0; margin-top: auto; padding: 20px 24px 34px; display: flex; flex-direction: column; gap: 10px; background: linear-gradient(to top, #12100E 72%, rgba(18,16,14,0));">
@@ -224,7 +225,8 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 <sc-if value="{{ showF2 }}" hint-placeholder-val="{{ true }}">
 <div class="dr-enter" style="margin-top: 10px; display: flex; flex-direction: column; gap: 10px;">
 <label for="dr-f2" style="font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 21px; color: #E0B878;">so that I feel…</label>
-<input id="dr-f2" type="text" value="{{ f2 }}" onChange="{{ onF2 }}" placeholder="how you’d like to feel instead" style="width: 100%; box-sizing: border-box; height: 54px; padding: 0 16px; border-radius: 18px; border: 1px solid rgba(232,206,168,0.18); background: rgba(232,206,168,0.05); color: #DCC9A6; font-size: 17px;" />
+<span style="margin-top: -4px; font-size: 15px; line-height: 1.45; color: #958772;">Name only the feeling you want. Leave the difficulty out of this line.</span>
+<input id="dr-f2" type="text" value="{{ f2 }}" onChange="{{ onF2 }}" placeholder="the feeling you want, in a few words" style="width: 100%; box-sizing: border-box; height: 54px; padding: 0 16px; border-radius: 18px; border: 1px solid rgba(232,206,168,0.18); background: rgba(232,206,168,0.05); color: #DCC9A6; font-size: 17px;" />
 <div style="display: flex; flex-wrap: wrap; gap: 8px;">
 <sc-for list="{{ sugB }}" as="o" hint-placeholder-count="4">
 <button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.selected }}" style="min-height: 44px; padding: 8px 15px; border-radius: 22px; border: {{ o.border }}; background: {{ o.bg }}; color: {{ o.color }}; font-size: 15px; text-align: left; cursor: pointer; transition: background 200ms, border-color 200ms, color 200ms;">{{ o.label }}</button>
@@ -441,8 +443,8 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 <div class="dr-pop" style="position: relative; box-sizing: border-box; padding: 14px 16px 18px; border-radius: 28px; background: rgba(22,18,15,0.76); backdrop-filter: blur(30px) saturate(140%); -webkit-backdrop-filter: blur(30px) saturate(140%); border: 1px solid rgba(255,236,210,0.10); display: flex; flex-direction: column; gap: 10px;">
 <div style="display: flex; align-items: center; gap: 8px;"><svg viewBox="0 0 120 120" width="22" height="22" aria-hidden="true" style="filter: drop-shadow(0 0 6px rgba(226,178,110,0.6));"><circle cx="60" cy="60" r="52" fill="#2A231C"></circle><path d="{{ tonightD }}" fill="#E8BE7C"></path></svg><span style="font-size: 15px; font-weight: 600;">{{ nightDoneShort }}</span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#D49A63" style="margin-left: auto; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></div>
 <span style="font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 26px; line-height: 1.2;">Sleeping on it</span>
-<div style="display: flex; align-items: baseline; gap: 8px;"><span style="font-size: 15px; color: #A8977D;">{{ morningAt }}</span><span style="margin-left: auto; font-size: 15px; font-weight: 600; color: #D49A63;">{{ untilWake }}</span></div>
-<div aria-hidden="true" style="height: 4px; border-radius: 2px; background: rgba(255,240,220,0.10); overflow: hidden;"><div style="width: 4%; height: 4px; border-radius: 2px; background: #C08A3E;"></div></div>
+<div aria-hidden="true" style="display: flex; gap: 3px;"><sc-for list="{{ progStrip }}" as="d" hint-placeholder-count="30"><span class="dr-mk" style="flex: 1; height: 6px; border-radius: 3px; background: {{ d.bg }}; box-shadow: {{ d.glow }}; animation: {{ d.anim }};"></span></sc-for></div>
+<div style="display: flex; align-items: baseline; gap: 8px;"><span style="font-size: 15px; color: #A8977D;">{{ calCount }}</span><span style="margin-left: auto; font-size: 15px; color: #A8977D;">{{ morningShort }}</span></div>
 <button type="button" onClick="{{ openFull }}" aria-label="Show the full statement" style="position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: none; border-radius: 28px; background: transparent; cursor: pointer;"></button>
 </div>
 </sc-if>
@@ -526,10 +528,14 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 <svg viewBox="0 0 120 120" width="88" height="88" aria-hidden="true" style="filter: drop-shadow(0 0 22px rgba(196,142,70,0.35));"><circle cx="60" cy="60" r="52" fill="#1C1814"></circle><path d="{{ tonightD }}" fill="#B98A4E"></path></svg>
 <span style="font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 28px; color: #B3A48C;">{{ nightDoneTitle }}</span>
 <span style="font-size: 17px;">Sleep well.</span>
+<div role="img" aria-label="{{ calAria }}" style="margin-top: 22px; width: 190px; display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); row-gap: 9px;">
+<sc-for list="{{ calDots }}" as="d" hint-placeholder-count="30"><span style="display: flex; justify-content: center;"><span class="dr-mk" style="width: 10px; height: 10px; box-sizing: border-box; border-radius: 5px; background: {{ d.bg }}; border: {{ d.border }}; animation: {{ d.anim }};"></span></span></sc-for>
+</div>
+<span style="font-size: 15px; color: #7E7262;">{{ calCount }}</span>
 </div>
 </sc-if>
 <div style="display: flex; flex-direction: column; align-items: center; gap: 16px; width: 100%;">
-<sc-if value="{{ aThree }}" hint-placeholder-val="{{ true }}">
+<sc-if value="{{ aThreeLive }}" hint-placeholder-val="{{ true }}">
 <div aria-hidden="true" style="display: flex; gap: 14px;">
 <sc-for list="{{ aMoonsDim }}" as="m" hint-placeholder-count="3"><svg viewBox="0 0 120 120" width="28" height="28"><circle cx="60" cy="60" r="52" fill="#181512" stroke="rgba(149,135,114,0.3)" style="stroke-width: 4;"></circle><path d="{{ m.d }}" fill="{{ m.fill }}"></path></svg></sc-for>
 </div>
@@ -648,11 +654,19 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 </sc-if>
 
 <sc-if value="{{ on.morningDone }}" hint-placeholder-val="{{ false }}">
-<div class="dr-enter" style="min-height: 852px; box-sizing: border-box; padding-top: 96px; display: flex; flex-direction: column; color: #DCCBB1;">
+<div class="dr-enter" style="min-height: 852px; box-sizing: border-box; padding-top: 84px; display: flex; flex-direction: column; color: #DCCBB1;">
 <div style="padding: 0 24px; display: flex; flex-direction: column; gap: 16px;">
-<svg viewBox="0 0 120 120" width="64" height="64" aria-hidden="true" style="filter: drop-shadow(0 0 16px rgba(224,166,110,0.45));"><circle cx="60" cy="60" r="52" fill="#2E261F"></circle><path d="{{ tonightD }}" fill="#E8B87E"></path></svg>
-<h1 style="margin: 0; font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 34px; font-weight: 400; line-height: 1.14; letter-spacing: -0.4px; color: #EEDDC2;">{{ doneMsg }}</h1>
-<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #A8977E;">{{ doneSub }}</p>
+<span style="font-size: 15px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #A08F77;">{{ nightOf }}</span>
+<h1 style="margin: -6px 0 0; font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 34px; font-weight: 400; line-height: 1.14; letter-spacing: -0.4px; color: #EEDDC2;">{{ doneMsg }}</h1>
+<p style="margin: -6px 0 0; font-size: 17px; line-height: 1.55; color: #A8977E;">{{ doneSub }}</p>
+<div style="padding: 16px 10px 12px; border-radius: 24px; background: linear-gradient(180deg, rgba(240,214,180,0.08) 0%, rgba(240,214,180,0.035) 100%); border: 1px solid rgba(240,214,180,0.13); display: flex; flex-direction: column; gap: 12px;">
+<div style="padding: 0 8px; display: flex; align-items: baseline; justify-content: space-between; gap: 12px;"><span style="font-size: 15px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #A08F77; white-space: nowrap;">Thirty nights</span><span style="flex: none; font-size: 15px; color: #C9B594;">{{ calShort }}</span></div>
+<div role="img" aria-label="{{ calAria }}" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); row-gap: 8px;">
+<sc-for list="{{ moons }}" as="m" hint-placeholder-count="30">
+<span style="display: flex; flex-direction: column; align-items: center; gap: 4px;"><svg class="dr-mk" viewBox="0 0 120 120" width="26" height="26" aria-hidden="true" style="filter: {{ m.glow }}; animation: {{ m.anim }};"><circle cx="60" cy="60" r="50" fill="{{ m.disc }}" stroke="{{ m.stroke }}" style="stroke-width: {{ m.sw }}; stroke-dasharray: {{ m.dash }};"></circle><circle cx="60" cy="60" r="12" fill="{{ m.dot }}"></circle><path d="M36 62l16 16 32-36" fill="none" stroke="{{ m.mark }}" style="stroke-width: 11; stroke-linecap: round; stroke-linejoin: round;"></path></svg><span style="font-size: 13px; line-height: 1; color: {{ m.numColor }};">{{ m.n }}</span></span>
+</sc-for>
+</div>
+</div>
 <sc-if value="{{ hasMilestone }}" hint-placeholder-val="{{ false }}">
 <div style="padding: 18px; border-radius: 24px; background: linear-gradient(180deg, rgba(240,214,180,0.09) 0%, rgba(240,214,180,0.045) 100%); border: 1px solid rgba(240,214,180,0.14); display: flex; flex-direction: column; gap: 10px;">
 <span style="font-size: 15px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #A08F77;">For this stage</span>
@@ -683,10 +697,10 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 </sc-if>
 <sc-if value="{{ notResting }}" hint-placeholder-val="{{ true }}">
 <div style="display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 6px 24px 0;">
-<div aria-hidden="true" style="position: relative; width: 210px; height: 210px; display: flex; align-items: center; justify-content: center;">
+<div aria-hidden="true" style="position: relative; width: 176px; height: 176px; display: flex; align-items: center; justify-content: center;">
 <div style="position: absolute; inset: 0; box-sizing: border-box; border-radius: 50%; border: 1px solid rgba(232,206,168,0.08);"></div>
-<div style="position: absolute; inset: 22px; box-sizing: border-box; border-radius: 50%; border: 1px solid rgba(232,206,168,0.06);"></div>
-<svg class="dr-float" viewBox="0 0 120 120" width="150" height="150" style="filter: drop-shadow(0 0 32px rgba(222,186,130,0.34));"><defs><radialGradient id="drHomeMoon" cx="58%" cy="38%" r="72%"><stop offset="0%" style="stop-color: #F2DAAE;"></stop><stop offset="100%" style="stop-color: #C8995A;"></stop></radialGradient></defs><circle cx="60" cy="60" r="52" fill="#1F1A15" stroke="rgba(232,206,168,0.14)" style="stroke-width: 1;"></circle><path d="{{ tonightD }}" fill="url(#drHomeMoon)"></path></svg>
+<div style="position: absolute; inset: 18px; box-sizing: border-box; border-radius: 50%; border: 1px solid rgba(232,206,168,0.06);"></div>
+<svg class="dr-float" viewBox="0 0 120 120" width="126" height="126" style="filter: drop-shadow(0 0 32px rgba(222,186,130,0.34));"><defs><radialGradient id="drHomeMoon" cx="58%" cy="38%" r="72%"><stop offset="0%" style="stop-color: #F2DAAE;"></stop><stop offset="100%" style="stop-color: #C8995A;"></stop></radialGradient></defs><circle cx="60" cy="60" r="52" fill="#1F1A15" stroke="rgba(232,206,168,0.14)" style="stroke-width: 1;"></circle><path d="{{ tonightD }}" fill="url(#drHomeMoon)"></path></svg>
 </div>
 <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center;">
 <sc-if value="{{ hasCycleChip }}" hint-placeholder-val="{{ false }}">
@@ -696,6 +710,7 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 <h1 style="margin: 0; font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 38px; font-weight: 400; line-height: 1.08; letter-spacing: -0.5px; color: #E2CDA8;">{{ nightOf }}</h1>
 <span style="font-size: 17px; color: #A3937B;">{{ homeSub }}</span>
 </div>
+<div style="align-self: stretch; margin-top: -4px;"><div aria-hidden="true" style="display: flex; gap: 3px;"><sc-for list="{{ progStrip }}" as="d" hint-placeholder-count="30"><span class="dr-mk" style="flex: 1; height: 6px; border-radius: 3px; background: {{ d.bg }}; box-shadow: {{ d.glow }}; animation: {{ d.anim }};"></span></sc-for></div></div>
 </div>
 </sc-if>
 <sc-if value="{{ resting }}" hint-placeholder-val="{{ false }}">
@@ -728,12 +743,12 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 </div>
 <div style="margin: 0 24px; display: flex; flex-direction: column; gap: 14px;">
 <div style="display: flex; align-items: baseline; justify-content: space-between;">
-<span style="font-size: 15px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8E806B;">{{ moonsLabel }}</span>
-<span style="font-size: 15px; color: #958772;">{{ moonsCount }}</span>
+<span style="font-size: 15px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8E806B; white-space: nowrap;">{{ moonsLabel }}</span>
+<span style="flex: none; font-size: 15px; color: #958772;">{{ moonsCount }}</span>
 </div>
 <div style="padding: 16px 10px 12px; border-radius: 26px; background: linear-gradient(180deg, rgba(232,206,168,0.06) 0%, rgba(232,206,168,0.025) 100%); border: 1px solid rgba(232,206,168,0.10); display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); row-gap: 6px;">
 <sc-for list="{{ moons }}" as="m" hint-placeholder-count="30">
-<button type="button" onClick="{{ m.pick }}" aria-label="{{ m.aria }}" aria-pressed="{{ m.selected }}" style="min-height: 58px; padding: 6px 0 4px; border-radius: 14px; border: {{ m.border }}; background: {{ m.bg }}; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; cursor: pointer; transition: background 200ms, border-color 200ms;"><svg viewBox="0 0 120 120" width="28" height="28" aria-hidden="true" style="filter: {{ m.glow }};"><circle cx="60" cy="60" r="52" fill="{{ m.shadow }}" stroke="{{ m.stroke }}" style="stroke-width: 4;"></circle><path d="{{ m.d }}" fill="{{ m.fill }}"></path></svg><span style="font-size: 15px; line-height: 1; color: {{ m.numColor }};">{{ m.n }}</span></button>
+<button type="button" onClick="{{ m.pick }}" aria-label="{{ m.aria }}" aria-pressed="{{ m.selected }}" style="min-height: 58px; padding: 6px 0 4px; border-radius: 14px; border: {{ m.border }}; background: {{ m.bg }}; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; cursor: pointer; transition: background 200ms, border-color 200ms;"><svg viewBox="0 0 120 120" width="30" height="30" aria-hidden="true" style="filter: {{ m.glow }};"><circle cx="60" cy="60" r="50" fill="{{ m.disc }}" stroke="{{ m.stroke }}" style="stroke-width: {{ m.sw }}; stroke-dasharray: {{ m.dash }};"></circle><circle cx="60" cy="60" r="12" fill="{{ m.dot }}"></circle><path d="M36 62l16 16 32-36" fill="none" stroke="{{ m.mark }}" style="stroke-width: 11; stroke-linecap: round; stroke-linejoin: round;"></path></svg><span style="font-size: 15px; line-height: 1; color: {{ m.numColor }};">{{ m.n }}</span></button>
 </sc-for>
 </div>
 <sc-if value="{{ selShow }}" hint-placeholder-val="{{ false }}">
@@ -743,7 +758,7 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 </div>
 </sc-if>
 <sc-if value="{{ selHint }}" hint-placeholder-val="{{ true }}">
-<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #8E806B;">Your thirty nights trace one cycle of the moon. A night you practice glows; a missed night simply stays dim. Tap a moon to look back.</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #8E806B;">Each night you send your message is marked off. A missed night stays open and costs nothing. Tap a night to look back.</p>
 </sc-if>
 </div>
 <div style="padding: 0 24px; display: flex; flex-direction: column; gap: 10px;">
@@ -791,12 +806,12 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 <div class="dr-enter" style="min-height: 852px; box-sizing: border-box; padding-top: 70px; display: flex; flex-direction: column; color: #2B2620;">
 <div style="margin: 0 24px; padding: 16px 10px 12px; border-radius: 26px; background: rgba(255,255,255,0.55); border: 1px solid rgba(110,84,50,0.14); display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); row-gap: 6px;" aria-hidden="true">
 <sc-for list="{{ moonsDay }}" as="m" hint-placeholder-count="30">
-<div style="min-height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;"><svg viewBox="0 0 120 120" width="28" height="28" style="filter: {{ m.glow }};"><circle cx="60" cy="60" r="52" fill="{{ m.shadow }}" stroke="{{ m.stroke }}" style="stroke-width: 4;"></circle><path d="{{ m.d }}" fill="{{ m.fill }}"></path></svg><span style="font-size: 13px; line-height: 1; color: #6B6155;">{{ m.n }}</span></div>
+<div style="min-height: 47px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;"><svg viewBox="0 0 120 120" width="26" height="26" style="filter: {{ m.glow }};"><circle cx="60" cy="60" r="50" fill="{{ m.disc }}" stroke="{{ m.stroke }}" style="stroke-width: {{ m.sw }}; stroke-dasharray: {{ m.dash }};"></circle><circle cx="60" cy="60" r="12" fill="{{ m.dot }}"></circle><path d="M36 62l16 16 32-36" fill="none" stroke="{{ m.mark }}" style="stroke-width: 11; stroke-linecap: round; stroke-linejoin: round;"></path></svg><span style="font-size: 13px; line-height: 1; color: #6B6155;">{{ m.n }}</span></div>
 </sc-for>
 </div>
 <div style="padding: 28px 24px 0; display: flex; flex-direction: column; gap: 14px;">
 <span style="font-size: 15px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #6B6155;">One full cycle of the moon</span>
-<h1 style="margin: 0; font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 34px; font-weight: 400; line-height: 1.14; letter-spacing: -0.4px; color: #2B2620;">Your thirty moons are complete</h1>
+<h1 style="margin: 0; font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 34px; font-weight: 400; line-height: 1.14; letter-spacing: -0.4px; color: #2B2620;">Your thirty nights are complete</h1>
 <p style="margin: 0; font-size: 17px; line-height: 1.55; color: #6B6155;">{{ inviteSub }}</p>
 <p style="margin: 0; font-size: 17px; line-height: 1.55; color: #6B6155;">Before you see what changed, rate the same two things you rated on night 1. Your earlier answers stay hidden until you’re done.</p>
 </div>
@@ -827,7 +842,7 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 </div>
 </sc-for>
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;">
-<div style="padding: 16px; border-radius: 22px; background: rgba(255,255,255,0.6); border: 1px solid rgba(110,84,50,0.14); display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 15px; color: #6B6155;">Moons lit</span><span style="font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 28px; color: #2B2620;">{{ practicedLine }}</span></div>
+<div style="padding: 16px; border-radius: 22px; background: rgba(255,255,255,0.6); border: 1px solid rgba(110,84,50,0.14); display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 15px; color: #6B6155;">Nights practiced</span><span style="font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 28px; color: #2B2620;">{{ practicedLine }}</span></div>
 <div style="padding: 16px; border-radius: 22px; background: rgba(255,255,255,0.6); border: 1px solid rgba(110,84,50,0.14); display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 15px; color: #6B6155;">Mornings you noticed a shift</span><span style="font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 28px; color: #2B2620;">{{ noticedCount }}</span></div>
 </div>
 <div style="padding: 16px; border-radius: 22px; background: rgba(255,255,255,0.6); border: 1px solid rgba(110,84,50,0.14); display: flex; flex-direction: column; gap: 6px;">
@@ -1118,6 +1133,7 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 </div>
 <div style="padding: 24px 24px 0; display: flex; flex-direction: column; gap: 12px;">
 <h1 style="margin: 0 0 4px; font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 32px; font-weight: 400; line-height: 1.14; letter-spacing: -0.4px; color: #E2CDA8;">Help and safety</h1>
+<div style="padding: 18px; border-radius: 22px; background: linear-gradient(180deg, rgba(192,138,62,0.13) 0%, rgba(192,138,62,0.05) 100%); border: 1px solid rgba(212,154,99,0.26); display: flex; flex-direction: column; gap: 8px;"><span style="font-size: 15px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #C9A06A;">The idea</span><span style="font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 20px; line-height: 1.4; color: #E2CDA8;">Each night you send your unconscious the same short message.</span><span style="font-size: 15px; line-height: 1.5; color: #A3937B;">Repeated as you fall asleep, for thirty nights, it gives your unconscious one clear thing to work on. It begins resolving the issue on inner levels, whether or not you remember your dreams. Your part is only to send the message and notice how you feel.</span></div>
 <div style="padding: 16px; border-radius: 22px; background: rgba(232,206,168,0.045); border: 1px solid rgba(232,206,168,0.10); display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 17px; font-weight: 600; color: #DCC9A6;">What this is</span><span style="font-size: 15px; line-height: 1.5; color: #958772;">A reflective practice. It isn’t therapy or medical care, and it doesn’t replace care you already have.</span></div>
 <div style="padding: 16px; border-radius: 22px; background: rgba(232,206,168,0.045); border: 1px solid rgba(232,206,168,0.10); display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 17px; font-weight: 600; color: #DCC9A6;">When to talk with a clinician first</span><span style="font-size: 15px; line-height: 1.5; color: #958772;">If you’re in crisis, if you have recurring nightmares about a trauma, or if a clinician has advised against sleep-focused practices. For trauma nightmares, imagery rehearsal therapy with a clinician has the strongest evidence.</span></div>
 <div style="padding: 16px; border-radius: 22px; background: rgba(232,206,168,0.045); border: 1px solid rgba(232,206,168,0.10); display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 17px; font-weight: 600; color: #DCC9A6;">Statement audio</span><span style="font-size: 15px; line-height: 1.5; color: #958772;">Keep the volume low, or use earbuds if you share a bed. The audio gets softer each time and stops on its own.</span></div>
@@ -1885,11 +1901,11 @@ class Component extends DCLogic {
     const THEMES = [
       { k: ['partner', 'husband', 'wife', 'boyfriend', 'girlfriend', 'spouse', 'relationship', 'marriage'], a: ['I feel unable to say what I truly feel', 'my fear of being misunderstood by the people I love', 'the distance I feel in my relationship'], b: ['free to express my true feelings', 'close and at ease', 'heard and understood'] },
       { k: ['mad', 'angry', 'anger', 'furious', 'resent', 'irritat', 'frustrat'], a: ['the anger I’ve been carrying', 'my frustration at not being heard'], b: ['calm and clear', 'at peace'] },
-      { k: ['work', 'boss', 'job', 'career', 'colleague', 'coworker', 'team'], a: ['my fear of speaking up at work', 'the pressure I feel at work'], b: ['confident and clear at work', 'steady under pressure'] },
+      { k: ['work', 'boss', 'job', 'career', 'colleague', 'coworker', 'team'], a: ['my fear of speaking up at work', 'the pressure I feel at work'], b: ['confident and clear at work', 'steady and capable'] },
       { k: ['worry', 'worried', 'anxious', 'anxiety', 'fear', 'afraid', 'scared', 'nervous', 'panic'], a: ['the worry that keeps returning', 'my fear of what might happen'], b: ['calm and settled', 'safe and steady'] },
-      { k: ['grief', 'loss', 'lost', 'died', 'death', 'miss '], a: ['the heaviness of this loss', 'the grief I’ve been holding'], b: ['at peace with what I’ve lost', 'gentle with myself'] },
+      { k: ['grief', 'loss', 'lost', 'died', 'death', 'miss '], a: ['the heaviness of this loss', 'the grief I’ve been holding'], b: ['at peace, with a sense of acceptance', 'gentle with myself'] },
       { k: ['stuck', 'decide', 'decision', 'choose', 'direction', 'purpose'], a: ['my feeling of being stuck', 'my confusion about what comes next'], b: ['clear about my next step', 'free to move forward'] },
-      { k: ['hurt', 'betray', 'forgive', 'wound', 'abandon'], a: ['the hurt I still carry', 'my sense of being let down'], b: ['free of this old hurt', 'ready to let it go'] },
+      { k: ['hurt', 'betray', 'forgive', 'wound', 'abandon'], a: ['the hurt I still carry', 'my sense of being let down'], b: ['whole and at peace', 'open-hearted and free'] },
       { k: ['enough', 'worth', 'confiden', 'failure', 'ashamed', 'shame', 'not good'], a: ['my feeling that I’m not enough', 'the shame I’ve been carrying'], b: ['worthy just as I am', 'confident in myself'] },
       { k: ['sleep', 'tired', 'exhaust', 'rest'], a: ['the restlessness I bring to bed', 'my worry about not sleeping'], b: ['rested and at ease', 'deeply calm'] }
     ];
@@ -1988,6 +2004,7 @@ class Component extends DCLogic {
     const othersRe = /\b(make|get|force|change|fix|convince)\s+(him|her|them|my\s+\w+)\b/;
     const cureRe = /\b(cure|cured|my\s+(illness|disease|cancer|condition|diagnosis))\b/;
     const negRe = /\b(not|no longer|never|stop|don[’']t|won[’']t|can[’']t|less|without)\b/;
+    const echoRe = /\b(lost|loss|losing|hurt\w*|pain\w*|grief|griev\w*|fear\w*|afraid|scared|anxi\w*|worr\w*|anger|angry|sad|sadness|stress\w*|pressure|shame|ashamed|guilt\w*|lonel\w*|stuck|problem\w*|struggl\w*|burden\w*|past|rid of|free (?:of|from)|let(?:ting)? (?:it|this|that|them|him|her) go|over (?:it|this|that|them|him|her))\b/;
     const andCount = (resPart.match(/\band\b/g) || []).length;
     const midWords = low.split(/\s+/).filter(Boolean).length;
     const others = othersRe.test(low);
@@ -1995,6 +2012,7 @@ class Component extends DCLogic {
       { label: 'About your inner world', ok: !others && !cureRe.test(low), hint: others ? 'Keep the focus on your own feelings, rather than changing someone else.' : 'This practice works with feelings, not medical conditions.' },
       { label: 'One focus', ok: andCount < 2 && resPart.indexOf(';') < 0, hint: 'Try one feeling for these thirty nights. You can begin another cycle later.' },
       { label: 'Said as what you want', ok: !negRe.test(feelPart), hint: 'Name the feeling you want, like “calm” rather than “not anxious.”' },
+      { label: 'Only the feeling you want', ok: !twoPart || !echoRe.test(feelPart), hint: 'Leave the difficulty out of this line, so your mind holds only the feeling you want: “at peace, with a sense of acceptance” rather than “at peace with what I’ve lost.”' },
       { label: 'Easy to repeat', ok: midWords <= 26, hint: 'Trim a few words so it’s easy to read three times.' }
     ];
     const allOk = CHECKS.every((c) => c.ok);
@@ -2024,7 +2042,7 @@ class Component extends DCLogic {
     else if (cp.filled) voiceNote = 'About ' + perRead + ' seconds to read. Tap Hear it for how it sounds at bedtime.';
     const SHEET = {
       f1: { title: 'I will resolve…', ph: 'e.g. I feel unable to say what I really feel', tip: 'Name the feeling, not the person. Start however you like; it’s shaped to fit.', preview: '…I will resolve ' + (cp.p1 || '…') + ',', sug: A },
-      f2: { title: 'So that I feel…', ph: 'e.g. free to express myself', tip: 'A feeling you’d like to have, in a few words.', preview: '…so that I feel ' + (cp.p2 || '…') + ',', sug: B },
+      f2: { title: 'So that I feel…', ph: 'e.g. free to express myself', tip: 'Only the feeling you want, in a few words.', preview: '…so that I feel ' + (cp.p2 || '…') + ',', sug: B },
       intent: { title: 'I will…', ph: 'e.g. allow myself to speak freely', tip: 'One thing you’d like to do or allow, in your own words.', preview: '…I will ' + (cp.pi || '…') + ',', sug: intentSugs }
     };
     const sheetKey = s.sheet;
@@ -2063,7 +2081,7 @@ class Component extends DCLogic {
     else if (s.aPaused) aTitle = 'Paused';
     else if (s.aWait) aTitle = 'Preparing the voice';
     else if (s.aPhase === 'pause') aTitle = 'A quiet pause';
-    let aSub = s.aPhase === 'done' ? 'Logged for you. Nothing more to do tonight.' : (three ? 'Each reading a little softer. It stops on its own.' : 'Softer each time. It fades out by ' + fmt((s.bedtime + mins) % 1440) + '.');
+    let aSub = s.aPhase === 'done' ? 'Your message is sent. Nothing more to do tonight.' : (three ? 'Each reading a little softer. It stops on its own.' : 'Softer each time. It fades out by ' + fmt((s.bedtime + mins) % 1440) + '.');
     if (s.aWait && s.aPhase !== 'done') aSub = prepLabel;
     const readingShapes = [this.moonD(0.25, true), this.moonD(0.55, true), this.moonD(1, true)];
     const passDone = (i) => s.aPhase === 'done' || s.aPass > i + 1 || (s.aPass === i + 1 && s.aPhase === 'pause');
@@ -2085,7 +2103,7 @@ class Component extends DCLogic {
       npSegs.push({ bg: doneI ? '#D49A63' : (curI ? 'rgba(212,154,99,0.55)' : 'rgba(255,240,220,0.12)') });
     }
     let aStatus = three ? 'Reading ' + s.aPass + ' of 3 · ' + voiceShort : 'Reading ' + s.aPass + ' · ' + voiceShort;
-    if (s.aPhase === 'done') aStatus = 'Night ' + day + ' logged.';
+    if (s.aPhase === 'done') aStatus = 'Night ' + day + ' is marked off.';
     else if (s.aPaused) aStatus = 'Paused';
     else if (s.aWait) aStatus = prepLabel;
     else if (s.aPhase === 'pause') aStatus = 'A quiet pause';
@@ -2162,7 +2180,7 @@ class Component extends DCLogic {
       1: 'You don’t need to remember a dream. Simply noticing how you feel is the practice.',
       3: 'Reading slowly, three times, lets the statement become the clear focus of your night.',
       7: 'A missed night costs nothing. Simply begin again tonight.',
-      14: 'Keep the same words each night. One clear intention, repeated, is the heart of this.',
+      14: 'Keep the same words each night. One clear message, repeated, is what your unconscious can work with.',
       21: 'Notice small things: your posture, your mood, how you speak with others.'
     };
     const isWeekly = day === 7 || day === 14 || day === 21;
@@ -2173,21 +2191,31 @@ class Component extends DCLogic {
 
     // Moons
     const noteFor = (n) => s.notes.filter((x) => x.day === n).slice(-1)[0];
+    const nightOver = !!s.practiced[day - 1] || on.morningLock || on.note || on.morningDone || on.hard || on.day30Invite || !!s.resting;
+    const toGo = Math.max(0, 30 - day + (nightOver ? 0 : 1));
+    const freshN = (on.morningDone || on.listen || (on.lock && s.lockPhase === 'night')) && s.practiced[day - 1] ? day : 0;
+    const MARK_ANIM = 'dr-mark 700ms 500ms cubic-bezier(0.2, 0.8, 0.2, 1) both';
+    const calCount = toGo === 0 ? count + ' of 30 nights done' : plural(count, 'night') + ' done · ' + toGo + ' to go';
+    const calShort = toGo === 0 ? count + ' of 30 done' : count + ' done · ' + toGo + ' to go';
+    const calAria = 'Thirty-night calendar. ' + (toGo === 0 ? count + ' of 30 nights done.' : plural(count, 'night') + ' done, ' + toGo + ' to go.');
     const moons = [];
     const moonsDay = [];
+    const progStrip = [];
+    const calDots = [];
     for (let n = 1; n <= 30; n++) {
       const ph = this.phaseOf(n);
       const d = this.moonD(Math.max(ph.f, 0.06), ph.waxing);
       const done = s.practiced[n - 1];
-      const tonight = n === day && !done;
-      const missed = n < day && !done;
+      const tonight = n === day && !done && !nightOver;
+      const missed = (n < day || (n === day && nightOver)) && !done;
       const sel = s.selMoon === n;
       let m;
-      if (done) m = { fill: '#E6BC7A', shadow: '#2A231C', stroke: 'rgba(232,206,168,0.18)', glow: 'drop-shadow(0 0 6px rgba(226,178,110,0.55))', numColor: '#DCC9A6', state: 'practiced' };
-      else if (tonight) m = { fill: 'rgba(230,188,122,0.5)', shadow: '#221D18', stroke: 'rgba(212,154,99,0.55)', glow: 'none', numColor: '#E6C48F', state: 'tonight' };
-      else if (missed) m = { fill: 'rgba(232,206,168,0.12)', shadow: '#1A1612', stroke: 'rgba(232,206,168,0.16)', glow: 'none', numColor: '#8E806B', state: 'missed' };
-      else m = { fill: 'rgba(232,206,168,0.26)', shadow: '#1C1814', stroke: 'rgba(232,206,168,0.12)', glow: 'none', numColor: '#8E806B', state: 'ahead' };
-      const labelState = { practiced: 'practiced', tonight: 'tonight', missed: 'missed', ahead: 'still ahead' }[m.state];
+      if (done) m = { disc: '#E6BC7A', stroke: 'transparent', sw: 0, dash: 'none', dot: 'transparent', mark: '#1A140C', glow: 'drop-shadow(0 0 6px rgba(226,178,110,0.5))', numColor: '#DCC9A6', state: 'practiced' };
+      else if (tonight) m = { disc: 'rgba(192,138,62,0.16)', stroke: '#D49A63', sw: 6, dash: 'none', dot: '#E0B878', mark: 'transparent', glow: 'none', numColor: '#E6C48F', state: 'tonight' };
+      else if (missed) m = { disc: 'transparent', stroke: 'rgba(232,206,168,0.34)', sw: 4, dash: '9 13', dot: 'transparent', mark: 'transparent', glow: 'none', numColor: '#8E806B', state: 'missed' };
+      else m = { disc: 'rgba(232,206,168,0.05)', stroke: 'rgba(232,206,168,0.16)', sw: 4, dash: 'none', dot: 'transparent', mark: 'transparent', glow: 'none', numColor: '#8E806B', state: 'ahead' };
+      m.anim = n === freshN ? MARK_ANIM : 'none';
+      const labelState = { practiced: 'done', tonight: 'tonight', missed: 'missed', ahead: 'still ahead' }[m.state];
       moons.push(Object.assign(m, {
         n: String(n), d: d, selected: sel,
         aria: 'Night ' + n + ', ' + labelState,
@@ -2196,18 +2224,28 @@ class Component extends DCLogic {
         pick: () => self.setState({ selMoon: self.state.selMoon === n ? 0 : n })
       }));
       moonsDay.push(done
-        ? { n: String(n), d: d, fill: '#B98139', shadow: '#E6DACA', stroke: 'rgba(110,84,50,0.2)', glow: 'drop-shadow(0 0 5px rgba(185,129,57,0.45))' }
-        : { n: String(n), d: d, fill: 'rgba(110,84,50,0.16)', shadow: '#EFE7DB', stroke: 'rgba(110,84,50,0.22)', glow: 'none' });
+        ? { n: String(n), disc: '#B98139', stroke: 'transparent', sw: 0, dash: 'none', dot: 'transparent', mark: '#FBF8F3', glow: 'drop-shadow(0 0 5px rgba(185,129,57,0.4))' }
+        : { n: String(n), disc: 'transparent', stroke: 'rgba(110,84,50,0.38)', sw: 4, dash: '9 13', dot: 'transparent', mark: 'transparent', glow: 'none' });
+      progStrip.push({
+        bg: done ? '#E2B26E' : (tonight ? 'rgba(212,154,99,0.5)' : (missed ? 'rgba(232,206,168,0.08)' : 'rgba(232,206,168,0.17)')),
+        glow: done ? '0 0 5px rgba(226,178,110,0.5)' : 'none',
+        anim: n === freshN ? MARK_ANIM : 'none'
+      });
+      calDots.push({
+        bg: done ? '#A67C45' : 'transparent',
+        border: done ? 'none' : (missed ? '1px dashed rgba(149,135,114,0.4)' : '1px solid rgba(149,135,114,0.28)'),
+        anim: n === freshN ? MARK_ANIM : 'none'
+      });
     }
     let selHead = '';
     let selBody = '';
     if (s.selMoon) {
       const n = s.selMoon;
       const nn = noteFor(n);
-      if (s.practiced[n - 1]) { selHead = 'Night ' + n + ' · practiced'; selBody = nn ? nn.answer + '. “' + nn.text + '”' : 'No morning note. Practicing is enough.'; }
+      if (s.practiced[n - 1]) { selHead = 'Night ' + n + ' · done'; selBody = nn ? nn.answer + '. “' + nn.text + '”' : 'No morning note. Practicing is enough.'; }
       else if (n === day) { selHead = 'Night ' + n + ' · tonight'; selBody = 'Your statement arrives at ' + fmt(s.bedtime) + '.'; }
       else if (n < day) { selHead = 'Night ' + n + ' · missed'; selBody = 'A missed night costs nothing. The cycle simply continues.'; }
-      else { selHead = 'Night ' + n + ' · still ahead'; selBody = 'This moon is waiting for you.'; }
+      else { selHead = 'Night ' + n + ' · still ahead'; selBody = 'This night is waiting for you.'; }
     }
     const recentNotes = s.notes.slice(-3).reverse().map((n) => ({ head: 'Morning ' + n.day + ' · ' + n.answer, text: n.text }));
     const startCycle = () => { self.stopSpeech(); self.archiveCycle(); self.setState({ screen: 'renew', renewPick: '', qMode: 'before', banner: '' }); };
@@ -2285,7 +2323,7 @@ class Component extends DCLogic {
     const strip = (lits) => lits.map((v) => ({ bg: v ? '#E2B26E' : 'rgba(232,206,168,0.16)', glow: v ? '0 0 5px rgba(226,178,110,0.55)' : 'none' }));
     const historyCards = s.history.filter((h) => !(s.resting && h.n === s.cycle)).reverse().map((h) => ({
       title: 'Cycle ' + h.n,
-      lit: h.lit + ' of 30 moons',
+      lit: h.lit + ' of 30 nights',
       statement: h.statement,
       chip1: h.r1a != null ? (h.twoPart ? 'Feeling ' : 'Issue ') + h.r1b + ' → ' + h.r1a : 'Ended early',
       chip2: h.r2a != null ? 'Closeness ' + h.r2b + ' → ' + h.r2a : '',
@@ -2471,7 +2509,7 @@ class Component extends DCLogic {
       sealBack: s.renew === 'keep' ? go('renew', { holding: false }) : (s.renew === 'refine' ? go('compose', { holding: false }) : go('rate', { holding: false, qMode: 'before' })),
       sealKicker: s.renew ? 'Cycle ' + nextCycle : 'Your intention',
       sealTitle: s.sealed ? 'Your intention is set' : (s.renew ? 'Set your intention again' : 'Set your intention'),
-      sealSub: s.sealed ? (s.renew ? 'These words carry you into cycle ' + nextCycle + '.' : 'These are your words for the next thirty nights.') : (s.renew === 'keep' ? 'The same words, a new beginning. When it feels right, press and hold the moon.' : 'Read it once more. When it feels right, press and hold the moon.'),
+      sealSub: s.sealed ? (s.renew ? 'These words carry you into cycle ' + nextCycle + '.' : 'This is the message you’ll send your unconscious each night, for thirty nights.') : (s.renew === 'keep' ? 'The same words, a new beginning. When it feels right, press and hold the moon.' : 'Read it once more. When it feels right, press and hold the moon.'),
       sealGlow: { o: s.sealed ? 1 : (s.holding ? 0.9 : 0), t: s.holding ? 'opacity 1.6s linear' : 'opacity 250ms ease-out' },
       sealLines: sealRows,
       rehStatus: rehStatus,
@@ -2565,6 +2603,7 @@ class Component extends DCLogic {
       aTitle: aTitle,
       aSub: aSub,
       aThree: three,
+      aThreeLive: three && s.aPhase !== 'done',
       aMoons: aMoons,
       aMoonsDim: aMoonsDim,
       aStatus: aStatus,
@@ -2611,7 +2650,7 @@ class Component extends DCLogic {
       audioPlan: (three ? 'Plays three times' : 'Plays for ' + mins + ' minutes') + ' in ' + voiceName + ', each time softer',
       voiceShort: voiceShort,
 
-      listenTop: s.aPhase === 'done' ? 'Your practice is done' : 'Close your eyes',
+      listenTop: s.aPhase === 'done' ? 'Your message is sent' : 'Close your eyes',
       stopListen: () => { self.stopAudio(); self.setState({ screen: s.returnTo === 'home' ? 'home' : 'tonight' }); },
       nightDoneTitle: 'Night ' + day + ' is done.',
       toNightLock: go('lock', { lockPhase: 'night', aOn: false }),
@@ -2633,7 +2672,7 @@ class Component extends DCLogic {
       laBackfill: needBackfill && s.mPhase === 'ask',
       laAsk: !needBackfill && s.mPhase === 'ask',
       laThanks: s.mPhase === 'thanks',
-      thanksSub: 'Night ' + day + ' logged. See you tonight.',
+      thanksSub: (s.practiced[day - 1] ? 'Night ' + day + ' is marked off.' : 'Noted.') + ' See you tonight.',
       backfillYes: () => self.faceThen(() => self.setState({ practiced: markNight(), backfillDone: true })),
       backfillNo: () => self.faceThen(() => self.setState({ backfillDone: true })),
       answerNo: () => self.faceThen(() => self.setState({ mPhase: 'thanks', mAnswer: 'Not really' })),
@@ -2674,7 +2713,7 @@ class Component extends DCLogic {
       toHard: () => { clearInterval(self._listen); self.setState({ screen: 'hard', returnTo: 'note', speaking: false, breathing: false }); },
 
       doneMsg: s.mAnswer === 'Not really' ? 'Thanks for noticing.' : 'Saved.',
-      doneSub: plural(count, 'moon') + ' lit so far. See you tonight.',
+      doneSub: s.practiced[day - 1] ? 'Another night’s message sent. See you tonight.' : 'A missed night costs nothing. See you tonight.',
       hasMilestone: !!NOTES[day],
       milestoneText: NOTES[day] || '',
       isWeekly: isWeekly,
@@ -2688,7 +2727,7 @@ class Component extends DCLogic {
       toPrivacy: go('privacy', { returnTo: 'home', privacyMsg: '' }),
       toPause: go('pause', { returnTo: s.screen === 'hard' ? 'hard' : 'home' }),
       hasBanner: !!s.banner,
-      bannerText: 'Your practice is paused. Reminders are off, and your moons and notes are kept.',
+      bannerText: 'Your practice is paused. Reminders are off, and your nights and notes are kept.',
       bannerButton: 'Resume',
       bannerAction: set({ banner: '' }),
       resting: resting,
@@ -2696,20 +2735,20 @@ class Component extends DCLogic {
       helpBorder: resting ? 'none' : '1px solid rgba(232,206,168,0.08)',
       homeRing: homeRing,
       restKicker: 'Cycle ' + s.cycle + ' complete',
-      restSub: count + ' of 30 moons lit',
+      restSub: count + ' of 30 nights done',
       statementLabel: resting ? 'Cycle ' + s.cycle + ' statement' : 'Your statement',
-      moonsLabel: resting ? 'Cycle ' + s.cycle + ' · thirty moons' : 'Your thirty moons',
+      moonsLabel: resting ? 'Cycle ' + s.cycle + ' · thirty nights' : 'Your thirty nights',
       cycleChip: s.cycle > 1 && !resting ? 'Cycle ' + s.cycle : '',
       hasCycleChip: s.cycle > 1 && !resting,
       hasHistory: historyCards.length > 0,
       historyCards: historyCards,
       ringNext: ringOf(s.practiced, 124, 280, 16),
-      nextLit: count + ' of 30 moons lit',
+      nextLit: count + ' of 30 nights done',
       nextKicker: 'Cycle ' + s.cycle,
 
       renewKicker: 'Cycle ' + nextCycle,
       renewBack: s.resting ? go('home') : go('next'),
-      renewLit: lastRec.lit + ' of 30 moons lit',
+      renewLit: lastRec.lit + ' of 30 nights done',
       renewCycleLabel: 'Cycle ' + lastRec.n,
       renewStatement: lastRec.statement,
       renewStrip: strip(lastRec.lits || s.practiced),
@@ -2737,9 +2776,15 @@ class Component extends DCLogic {
       startFollow: 'Cycle ' + nextCycle + '’s night 30 also serves as the 30-day check-in for cycle ' + s.cycle + '.',
       beginCycleNow: () => self.beginCycle(),
       startCta: 'Begin cycle ' + nextCycle,
-      readyKicker: s.cycle > 1 ? 'The first moon of cycle ' + s.cycle : 'The first moon of your cycle',
-      homeSub: count === 0 ? (s.cycle > 1 ? 'A fresh cycle of the moon' : 'Your first moon') : plural(count, 'night') + ' practiced so far',
-      moonsCount: count + ' of 30 lit',
+      readyKicker: s.cycle > 1 ? 'The first night of cycle ' + s.cycle : 'The first of thirty nights',
+      homeSub: count === 0 ? (s.cycle > 1 ? 'A fresh cycle · 30 nights to go' : 'Your first night · 30 to go') : calCount,
+      moonsCount: calShort,
+      calCount: calCount,
+      calShort: calShort,
+      calAria: calAria,
+      progStrip: progStrip,
+      calDots: calDots,
+      morningShort: 'Check-in at ' + fmt(s.wake),
       moons: moons,
       moonsDay: moonsDay,
       selShow: !!s.selMoon,
@@ -2751,7 +2796,7 @@ class Component extends DCLogic {
       noNotes: s.notes.length === 0,
       recentNotes: recentNotes,
 
-      inviteSub: 'You lit ' + count + ' of your 30 moons.',
+      inviteSub: 'You sent your message on ' + count + ' of 30 nights.',
       startAfter: go('rate', { qMode: 'after', after: {}, rate1After: 5, rate2After: 5 }),
 
       afterExtraBack: go('rate', { qMode: 'after' }),
