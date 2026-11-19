@@ -213,15 +213,16 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 <span style="font-size: 15px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8E806B;">{{ composeKicker }}</span>
 <h1 style="margin: 0; font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 32px; font-weight: 400; line-height: 1.14; letter-spacing: -0.4px; color: #E2CDA8;">{{ composeTitle }}</h1>
 <sc-if value="{{ showList }}" hint-placeholder-val="{{ true }}">
-<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #A3937B;">Choose one of Robert Waggoner’s statements for these thirty nights, or write your own. You can adjust the wording after.</p>
-<div role="group" aria-label="Robert Waggoner’s statements" style="margin-top: 6px; display: flex; flex-direction: column; gap: 10px;">
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #A3937B;">Choose one for these thirty nights.</p>
+<div role="group" aria-label="Themes" style="margin-top: 4px; border-radius: 22px; background: rgba(232,206,168,0.045); border: 1px solid rgba(232,206,168,0.12); overflow: hidden;">
 <sc-for list="{{ themeCards }}" as="o" hint-placeholder-count="9">
-<button type="button" onClick="{{ o.pick }}" style="width: 100%; padding: 16px 18px; box-sizing: border-box; border-radius: 22px; border: 1px solid rgba(232,206,168,0.14); background: rgba(232,206,168,0.045); display: flex; flex-direction: column; align-items: flex-start; gap: 6px; text-align: left; color: inherit; cursor: pointer;"><span style="font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #C9A06A;">{{ o.label }}</span><span style="font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 17px; line-height: 1.45; color: #DCC9A6;">{{ o.preview }}</span></button>
+<button type="button" onClick="{{ o.pick }}" style="width: 100%; min-height: 52px; padding: 0 16px 0 18px; box-sizing: border-box; display: flex; align-items: center; gap: 12px; border: none; border-top: {{ o.rule }}; background: transparent; color: #DCC9A6; font-size: 17px; text-align: left; cursor: pointer;"><span style="flex: 1;">{{ o.label }}</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#8E806B" style="flex: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button>
 </sc-for>
 </div>
 </sc-if>
 <sc-if value="{{ showStatement }}" hint-placeholder-val="{{ false }}">
-<button type="button" onClick="{{ changeStatement }}" style="align-self: flex-start; min-height: 44px; margin: -6px 0 -4px -4px; padding: 0 4px; display: flex; align-items: center; gap: 6px; border: none; background: transparent; color: #E0B878; font-size: 16px; font-weight: 600; cursor: pointer;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg><span>Choose a different statement</span></button>
+<button type="button" onClick="{{ changeStatement }}" style="align-self: flex-start; min-height: 44px; margin: -6px 0 -4px -4px; padding: 0 4px; display: flex; align-items: center; gap: 6px; border: none; background: transparent; color: #E0B878; font-size: 16px; font-weight: 600; cursor: pointer;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg><span>All themes</span></button>
+<p style="margin: -4px 0 0; font-size: 17px; line-height: 1.55; color: #A3937B;">{{ recLead }}</p>
 </sc-if>
 <sc-if value="{{ askWho }}" hint-placeholder-val="{{ false }}">
 <div class="dr-enter" style="margin-top: 8px; display: flex; flex-direction: column; gap: 10px;">
@@ -238,8 +239,8 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 <sc-if value="{{ showStatement }}" hint-placeholder-val="{{ true }}">
 <div class="dr-enter" style="margin-top: 12px; padding: 18px 20px 20px; border-radius: 28px; background: linear-gradient(180deg, rgba(232,206,168,0.08) 0%, rgba(232,206,168,0.03) 100%); border: 1px solid rgba(232,206,168,0.13); box-shadow: inset 0 1px 0 rgba(255,240,220,0.06), 0 0 60px -20px rgba(212,154,99,0.35); display: flex; flex-direction: column; gap: 3px;">
 <div style="margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
-<span style="font-size: 15px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8E806B;">Your statement</span>
-<button type="button" onClick="{{ hearIt }}" style="height: 44px; padding: 0 16px 0 12px; display: flex; align-items: center; gap: 6px; border-radius: 22px; border: 1px solid rgba(212,154,99,0.4); background: {{ ttsBg }}; color: #E8C48C; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 200ms;"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="flex: none;" aria-hidden="true"><path d="{{ ttsIcon }}"></path></svg><span>{{ ttsLabel }}</span></button>
+<span style="font-size: 15px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8E806B;">{{ stmtKicker }}</span>
+<button type="button" onClick="{{ hearIt }}" style="flex: none; white-space: nowrap; height: 44px; padding: 0 16px 0 12px; display: flex; align-items: center; gap: 6px; border-radius: 22px; border: 1px solid rgba(212,154,99,0.4); background: {{ ttsBg }}; color: #E8C48C; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 200ms;"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="flex: none;" aria-hidden="true"><path d="{{ ttsIcon }}"></path></svg><span>{{ ttsLabel }}</span></button>
 </div>
 <sc-for list="{{ composeRows }}" as="row" hint-placeholder-count="5">
 <span style="display: block; font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 22px; line-height: 1.42;"><sc-for list="{{ row.parts }}" as="pt" hint-placeholder-count="2"><span style="color: {{ pt.color }}; transition: color 300ms;">{{ pt.text }}</span></sc-for></span>
@@ -249,7 +250,7 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 <sc-if value="{{ hasComposeHint }}" hint-placeholder-val="{{ false }}">
 <p class="dr-enter" style="margin: 0; padding: 12px 14px; border-radius: 16px; background: rgba(201,144,111,0.10); border: 1px solid rgba(201,144,111,0.25); display: flex; gap: 10px; font-size: 15px; line-height: 1.45; color: #D9A98C;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" style="flex: none; margin-top: 2px; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round;" aria-hidden="true"><path d="M12 3l1.8 6.2L20 11l-6.2 1.8L12 19l-1.8-6.2L4 11l6.2-1.8z"></path></svg><span>{{ composeHint }}</span></p>
 </sc-if>
-<button type="button" onClick="{{ toggleAdjust }}" aria-expanded="{{ adjustOpen }}" aria-controls="dr-adjust" style="align-self: flex-start; min-height: 44px; padding: 0 4px; display: flex; align-items: center; gap: 8px; border: none; background: transparent; color: #E0B878; font-size: 16px; font-weight: 600; cursor: pointer;"><span>Adjust the wording</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" style="transform: rotate({{ adjustTurn }}deg); transition: transform 200ms; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+<button type="button" onClick="{{ toggleAdjust }}" aria-expanded="{{ adjustOpen }}" aria-controls="dr-adjust" style="align-self: flex-start; min-height: 44px; padding: 0 4px; display: flex; align-items: center; gap: 8px; border: none; background: transparent; color: #E0B878; font-size: 16px; font-weight: 600; cursor: pointer;"><span>Edit the statement</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" style="transform: rotate({{ adjustTurn }}deg); transition: transform 200ms; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
 <sc-if value="{{ adjustOpen }}" hint-placeholder-val="{{ false }}">
 <div id="dr-adjust" class="dr-enter" style="margin-top: -4px; padding: 18px; border-radius: 24px; background: rgba(232,206,168,0.04); border: 1px solid rgba(232,206,168,0.12); display: flex; flex-direction: column; gap: 20px;">
 <div role="group" aria-labelledby="dr-verb-l" style="display: flex; flex-direction: column; gap: 10px;">
@@ -279,9 +280,11 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 </sc-if>
 </sc-if>
 </div>
+<sc-if value="{{ showStatement }}" hint-placeholder-val="{{ true }}">
 <div style="position: sticky; bottom: 0; margin-top: auto; padding: 28px 24px 40px; display: flex; flex-direction: column; gap: 12px; background: linear-gradient(to top, #12100E 72%, rgba(18,16,14,0));">
 <button type="button" onClick="{{ composeNext }}" disabled="{{ notFilled }}" style="height: 56px; border: none; border-radius: 28px; background: linear-gradient(180deg, #CF9A55 0%, #B8803A 100%); box-shadow: 0 12px 28px -12px rgba(192,138,62,0.6), inset 0 1px 0 rgba(255,236,200,0.35); color: #1A140C; font-size: 17px; font-weight: 600; cursor: pointer; opacity: {{ sealOpacity }}; transition: opacity 200ms;">Continue</button>
 </div>
+</sc-if>
 </div>
 </sc-if>
 
@@ -1510,7 +1513,7 @@ class Component extends DCLogic {
     return { f: (1 - Math.cos(2 * Math.PI * p)) / 2, waxing: p < 0.5 };
   }
 
-  // Robert Waggoner's wordings for the main issues people bring (email, 18 Nov 2026).
+  // Recommended wording for the main issues people bring.
   themes() {
     return {
       all: { label: 'All my feelings', verb: 'express', feel: '', goal: '' },
@@ -1921,18 +1924,16 @@ class Component extends DCLogic {
     const twoPart = cp.twoPart;
     const statement = cp.statement;
 
-    // Robert's themes
+    // Themes
     const TH = this.themes();
     const ORDER = ['all', 'grief', 'depression', 'anxiety', 'esteem', 'stress', 'anger', 'relationship', 'other'];
     const toBottom = () => { setTimeout(() => { const el = self._scrollEl; if (el) { try { el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' }); } catch (e) { el.scrollTop = el.scrollHeight; } } }, 80); };
     const chipLook = (sel) => ({ selected: sel, bg: sel ? 'rgba(192,138,62,0.20)' : N.glass, border: sel ? '1.5px solid ' + N.accent : '1px solid ' + N.line, color: sel ? '#F0D3A0' : '#BDAE95' });
     const quiet = { tts: false, ttsSpan: null, ttsWait: false };
     const pickTheme = (k) => () => { self.stopSpeech(); const t = TH[k]; self.setState(Object.assign({ theme: k, verb: t.verb, feel: t.feel, goal: t.goal, goalOwn: '' }, quiet));  };
-    const themeCards = ORDER.map((k) => {
-      const t = TH[k];
-      const pv = self.composeParts({ theme: k, verb: t.verb, feel: t.feel, who: '', goal: t.goal }).preview;
-      return { label: t.label, preview: k === 'other' ? 'Start from “Tonight in my dreams, I will fully express my feelings of …” and use your own words.' : pv, pick: pickTheme(k) };
-    });
+    const recTheme = TH[s.theme];
+    const recommended = recTheme ? self.composeParts({ theme: s.theme, verb: recTheme.verb, feel: recTheme.feel, who: s.who, goal: recTheme.goal }).statement : '';
+    const themeCards = ORDER.map((k, n) => ({ label: TH[k].label, pick: pickTheme(k), rule: n ? '1px solid rgba(232,206,168,0.09)' : 'none' }));
     const GOALS = [['My natural vitality', 'my natural vitality'], ['My constructive demeanor', 'my constructive demeanor'], ['Leave this out', '']];
     const goalChips = GOALS.map((g) => Object.assign({ label: g[0], pick: () => { self.stopSpeech(); self.setState(Object.assign({ goal: g[1], goalOwn: '' }, quiet)); } }, chipLook(!s.goalOwn && (s.goal || '') === g[1])));
     const segLook = (on) => ({ pressed: on, bg: on ? '#C08A3E' : 'transparent', color: on ? '#1A140C' : '#BDAE95' });
@@ -2046,8 +2047,8 @@ class Component extends DCLogic {
     else if (ttsOn) voiceNote = 'Playing in ' + (s.voicePref === 'low' ? 'the low voice' : 'the soft voice') + '. This is how it will sound at bedtime.';
     else if (recording) voiceNote = 'Recording. Read your statement slowly, then tap Stop.';
     else if (s.recState === 'done') voiceNote = 'Your recording is saved on this phone. Choose it under statement audio.';
-    else if (cp.filled) voiceNote = 'About ' + perRead + ' seconds to read. Tap Hear it for how it sounds at bedtime.';
-    else if (cp.started) voiceNote = s.theme === 'relationship' ? 'Add who the relationship is with to finish your statement.' : 'Add the feeling to finish your statement.';
+    else if (cp.filled) voiceNote = 'About ' + perRead + ' seconds to read.';
+    else if (cp.started) voiceNote = '';
     const SHEET = {
       f1: { title: 'My feelings of…', ph: 'e.g. grief', tip: '', preview: '', sug: [] }
     };
@@ -2471,6 +2472,8 @@ class Component extends DCLogic {
       showF2: !!s.f1.trim() || !!s.f2.trim(),
       showStatement: cp.started,
       composeTitle: s.theme && TH[s.theme] ? TH[s.theme].label : 'What would you like to work on?',
+      recLead: s.theme === 'other' ? 'Name the feeling, then shape the rest to fit you.' : s.theme === 'relationship' ? 'Add who it’s with, then edit any part so it feels like yours.' : 'Here’s the statement we recommend. Edit any part so it feels like yours.',
+      stmtKicker: (s.theme === 'other' || cp.statement !== recommended) ? 'Your statement' : 'Recommended',
       composeKicker: s.renew ? 'Cycle ' + nextCycle + ' · your intention' : 'Your intention',
       composeHint: composeHint,
       hasComposeHint: !!composeHint,
