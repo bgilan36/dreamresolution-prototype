@@ -211,13 +211,18 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 </div>
 <div style="padding: 30px 24px 0; display: flex; flex-direction: column; gap: 14px;">
 <span style="font-size: 15px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8E806B;">{{ composeKicker }}</span>
-<h1 style="margin: 0; font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 32px; font-weight: 400; line-height: 1.14; letter-spacing: -0.4px; color: #E2CDA8;">What would you like to work on?</h1>
-<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #A3937B;">Choose one for these thirty nights. Each begins with wording from Robert Waggoner, and you can adjust it.</p>
-<div role="group" aria-label="What you would like to work on" style="margin-top: 6px; display: flex; flex-wrap: wrap; gap: 8px;">
-<sc-for list="{{ themeChips }}" as="o" hint-placeholder-count="9">
-<button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.selected }}" style="min-height: 44px; padding: 8px 15px; border-radius: 22px; border: {{ o.border }}; background: {{ o.bg }}; color: {{ o.color }}; font-size: 15px; text-align: left; cursor: pointer; transition: background 200ms, border-color 200ms, color 200ms;">{{ o.label }}</button>
+<h1 style="margin: 0; font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 32px; font-weight: 400; line-height: 1.14; letter-spacing: -0.4px; color: #E2CDA8;">{{ composeTitle }}</h1>
+<sc-if value="{{ showList }}" hint-placeholder-val="{{ true }}">
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #A3937B;">Choose one of Robert Waggoner’s statements for these thirty nights, or write your own. You can adjust the wording after.</p>
+<div role="group" aria-label="Robert Waggoner’s statements" style="margin-top: 6px; display: flex; flex-direction: column; gap: 10px;">
+<sc-for list="{{ themeCards }}" as="o" hint-placeholder-count="9">
+<button type="button" onClick="{{ o.pick }}" style="width: 100%; padding: 16px 18px; box-sizing: border-box; border-radius: 22px; border: 1px solid rgba(232,206,168,0.14); background: rgba(232,206,168,0.045); display: flex; flex-direction: column; align-items: flex-start; gap: 6px; text-align: left; color: inherit; cursor: pointer;"><span style="font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #C9A06A;">{{ o.label }}</span><span style="font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 17px; line-height: 1.45; color: #DCC9A6;">{{ o.preview }}</span></button>
 </sc-for>
 </div>
+</sc-if>
+<sc-if value="{{ showStatement }}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{ changeStatement }}" style="align-self: flex-start; min-height: 44px; margin: -6px 0 -4px -4px; padding: 0 4px; display: flex; align-items: center; gap: 6px; border: none; background: transparent; color: #E0B878; font-size: 16px; font-weight: 600; cursor: pointer;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg><span>Choose a different statement</span></button>
+</sc-if>
 <sc-if value="{{ askWho }}" hint-placeholder-val="{{ false }}">
 <div class="dr-enter" style="margin-top: 8px; display: flex; flex-direction: column; gap: 10px;">
 <label for="dr-who" style="font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 21px; color: #E0B878;">My relationship with…</label>
@@ -1512,11 +1517,11 @@ class Component extends DCLogic {
       grief: { label: 'Grief', verb: 'express', feel: 'grief', goal: 'my natural vitality' },
       depression: { label: 'Depression', verb: 'resolve', feel: 'depression', goal: 'my natural vitality' },
       anxiety: { label: 'Anxiety', verb: 'resolve', feel: 'anxiety', goal: 'my natural vitality' },
-      esteem: { label: 'Self-esteem', verb: 'resolve', feel: 'self-esteem', goal: 'my natural vitality' },
-      stress: { label: 'Stress', verb: 'express', feel: 'stress', goal: 'my natural vitality' },
-      anger: { label: 'Anger', verb: 'express', feel: 'anger', goal: 'my constructive demeanor' },
+      esteem: { label: 'Self-esteem', verb: 'resolve', feel: 'self esteem', goal: 'my natural vitality' },
+      stress: { label: 'Stress', verb: 'express', feel: 'stress', goal: 'my natural vitality', noAnd: true },
+      anger: { label: 'Anger', verb: 'express', feel: 'anger', goal: 'my constructive demeanor', noAnd: true },
       relationship: { label: 'A relationship', verb: 'express', feel: 'concern about my relationship with', who: true, goal: '' },
-      other: { label: 'Something else', verb: 'express', feel: '', goal: 'my natural vitality', own: true }
+      other: { label: 'Write my own', verb: 'express', feel: '', goal: 'my natural vitality', own: true }
     };
   }
 
@@ -1537,15 +1542,16 @@ class Component extends DCLogic {
     const filled = !!th && (isAll || !!feel) && (!th || !th.who || !!who);
     const segs = [{ t: 'Tonight in my dreams,' }, { t: 'I will fully ' + verb }, { t: objText, slot: 'feel' }];
     if (hasGoal) segs.push({ t: 'so that I regain' }, { t: goal, slot: 'goal' });
-    segs.push({ t: (hasGoal ? 'and ' : '') + 'in such a way that no one is harmed' }, { t: 'and in everyone’s best interest.' });
+    segs.push({ t: (hasGoal && !(th && th.noAnd) ? 'and ' : '') + 'in such a way that no one is harmed' }, { t: 'and in everyone’s best interest.' });
     const lines = segs.map((g) => Object.assign({}, g, { text: g.t }));
     let pos = 0;
     lines.forEach((ln) => { ln.start = pos; pos += ln.text.length + 1; });
     const statement = filled ? lines.map((l) => l.text).join(' ') : '';
+    const preview = lines.map((l) => l.text).join(' ');
     // Phrases the voice reads, with a breath between each.
     const groups = hasGoal ? [[0], [1, 2], [3, 4], [5], [6]] : [[0], [1, 2], [3], [4]];
     const chunks = filled ? groups.map((g) => ({ text: g.map((i) => lines[i].text).join(' '), from: g[0], to: g[g.length - 1] })) : [];
-    return { twoPart: hasGoal, hasGoal: hasGoal, isAll: isAll, verb: verb, feel: feel, who: who, goal: goal, objText: objText, p1: objText, p2: goal, pi: objText, started: !!th, filled: filled, lines: lines, statement: statement, chunks: chunks, groups: groups };
+    return { twoPart: hasGoal, hasGoal: hasGoal, isAll: isAll, verb: verb, feel: feel, who: who, goal: goal, objText: objText, p1: objText, p2: goal, pi: objText, started: !!th, filled: filled, lines: lines, statement: statement, preview: preview, chunks: chunks, groups: groups };
   }
 
   // The calm voice: phrases from the suggestions are pre-rendered; anything typed is made in a background worker.
@@ -1921,8 +1927,12 @@ class Component extends DCLogic {
     const toBottom = () => { setTimeout(() => { const el = self._scrollEl; if (el) { try { el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' }); } catch (e) { el.scrollTop = el.scrollHeight; } } }, 80); };
     const chipLook = (sel) => ({ selected: sel, bg: sel ? 'rgba(192,138,62,0.20)' : N.glass, border: sel ? '1.5px solid ' + N.accent : '1px solid ' + N.line, color: sel ? '#F0D3A0' : '#BDAE95' });
     const quiet = { tts: false, ttsSpan: null, ttsWait: false };
-    const pickTheme = (k) => () => { self.stopSpeech(); const t = TH[k]; self.setState(Object.assign({ theme: k, verb: t.verb, feel: t.feel, goal: t.goal, goalOwn: '' }, quiet)); if (!t.who && !t.own) toBottom(); };
-    const themeChips = ORDER.map((k) => Object.assign({ label: TH[k].label, pick: pickTheme(k) }, chipLook(s.theme === k)));
+    const pickTheme = (k) => () => { self.stopSpeech(); const t = TH[k]; self.setState(Object.assign({ theme: k, verb: t.verb, feel: t.feel, goal: t.goal, goalOwn: '' }, quiet));  };
+    const themeCards = ORDER.map((k) => {
+      const t = TH[k];
+      const pv = self.composeParts({ theme: k, verb: t.verb, feel: t.feel, who: '', goal: t.goal }).preview;
+      return { label: t.label, preview: k === 'other' ? 'Start from “Tonight in my dreams, I will fully express my feelings of …” and use your own words.' : pv, pick: pickTheme(k) };
+    });
     const GOALS = [['My natural vitality', 'my natural vitality'], ['My constructive demeanor', 'my constructive demeanor'], ['Leave this out', '']];
     const goalChips = GOALS.map((g) => Object.assign({ label: g[0], pick: () => { self.stopSpeech(); self.setState(Object.assign({ goal: g[1], goalOwn: '' }, quiet)); } }, chipLook(!s.goalOwn && (s.goal || '') === g[1])));
     const segLook = (on) => ({ pressed: on, bg: on ? '#C08A3E' : 'transparent', color: on ? '#1A140C' : '#BDAE95' });
@@ -2438,7 +2448,9 @@ class Component extends DCLogic {
       f2: s.f2,
       onF1: (e) => { self.stopSpeech(); self.setState({ f1: e.target.value, form: 'two', tts: false, ttsSpan: null, ttsWait: false }); },
       onF2: (e) => { self.stopSpeech(); self.setState({ f2: e.target.value, form: 'two', tts: false, ttsSpan: null, ttsWait: false }); },
-      themeChips: themeChips,
+      themeCards: themeCards,
+      showList: !s.theme,
+      changeStatement: () => { self.stopSpeech(); self.setState({ theme: '', who: '', adjust: false, tts: false, ttsSpan: null, ttsWait: false }); },
       goalChips: goalChips,
       who: s.who,
       feel: s.feel,
@@ -2458,6 +2470,7 @@ class Component extends DCLogic {
       setResolve: () => { self.stopSpeech(); self.setState(Object.assign({ verb: 'resolve' }, quiet)); },
       showF2: !!s.f1.trim() || !!s.f2.trim(),
       showStatement: cp.started,
+      composeTitle: s.theme && TH[s.theme] ? TH[s.theme].label : 'What would you like to work on?',
       composeKicker: s.renew ? 'Cycle ' + nextCycle + ' · your intention' : 'Your intention',
       composeHint: composeHint,
       hasComposeHint: !!composeHint,
