@@ -190,7 +190,7 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 <div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 15px; color: {{ qp.text2 }};"><span>Not at all</span><span style="font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 26px; color: {{ qp.title }};">{{ r1 }}</span><span>Extremely</span></div>
 </div>
 <div style="padding: 18px; border-radius: 24px; background: {{ qp.glass }}; border: 1px solid {{ qp.line }}; display: flex; flex-direction: column; gap: 6px;">
-<label for="dr-r2" style="font-size: 17px; font-weight: 600; color: {{ qp.title }};">How close do you feel to this?</label>
+<label for="dr-r2" style="font-size: 17px; font-weight: 600; color: {{ qp.title }};">{{ rPrompt2 }}</label>
 <span style="font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 18px; line-height: 1.4; color: {{ qp.text2 }};">{{ rQuote2 }}</span>
 <input id="dr-r2" class="{{ rangeClass }}" type="range" min="0" max="10" step="1" value="{{ r2 }}" onChange="{{ onR2 }}" style="background: linear-gradient(to right, {{ qp.accent }} 0%, {{ qp.accent }} {{ r2pct }}%, {{ qp.track }} {{ r2pct }}%, {{ qp.track }} 100%);" />
 <div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 15px; color: {{ qp.text2 }};"><span>Not at all</span><span style="font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 26px; color: {{ qp.title }};">{{ r2 }}</span><span>Completely</span></div>
@@ -211,27 +211,23 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 </div>
 <div style="padding: 30px 24px 0; display: flex; flex-direction: column; gap: 14px;">
 <span style="font-size: 15px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #8E806B;">{{ composeKicker }}</span>
-<h1 style="margin: 0; font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 32px; font-weight: 400; line-height: 1.14; letter-spacing: -0.4px; color: #E2CDA8;">What would you like to resolve?</h1>
-<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #A3937B;">Choose one feeling for these thirty nights. Start from a suggestion, or use your own words.</p>
-<div style="margin-top: 6px; display: flex; flex-direction: column; gap: 10px;">
-<label for="dr-f1" style="font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 21px; color: #E0B878;">I will resolve…</label>
-<input id="dr-f1" type="text" value="{{ f1 }}" onChange="{{ onF1 }}" placeholder="the feeling, in a few words" style="width: 100%; box-sizing: border-box; height: 54px; padding: 0 16px; border-radius: 18px; border: 1px solid rgba(232,206,168,0.18); background: rgba(232,206,168,0.05); color: #DCC9A6; font-size: 17px;" />
-<div style="display: flex; flex-wrap: wrap; gap: 8px;">
-<sc-for list="{{ sugA }}" as="o" hint-placeholder-count="8">
+<h1 style="margin: 0; font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 32px; font-weight: 400; line-height: 1.14; letter-spacing: -0.4px; color: #E2CDA8;">What would you like to work on?</h1>
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #A3937B;">Choose one for these thirty nights. Each begins with wording from Robert Waggoner, and you can adjust it.</p>
+<div role="group" aria-label="What you would like to work on" style="margin-top: 6px; display: flex; flex-wrap: wrap; gap: 8px;">
+<sc-for list="{{ themeChips }}" as="o" hint-placeholder-count="9">
 <button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.selected }}" style="min-height: 44px; padding: 8px 15px; border-radius: 22px; border: {{ o.border }}; background: {{ o.bg }}; color: {{ o.color }}; font-size: 15px; text-align: left; cursor: pointer; transition: background 200ms, border-color 200ms, color 200ms;">{{ o.label }}</button>
 </sc-for>
 </div>
+<sc-if value="{{ askWho }}" hint-placeholder-val="{{ false }}">
+<div class="dr-enter" style="margin-top: 8px; display: flex; flex-direction: column; gap: 10px;">
+<label for="dr-who" style="font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 21px; color: #E0B878;">My relationship with…</label>
+<input id="dr-who" type="text" value="{{ who }}" onChange="{{ onWho }}" placeholder="a name, or “my father”" autocomplete="off" style="width: 100%; box-sizing: border-box; height: 54px; padding: 0 16px; border-radius: 18px; border: 1px solid rgba(232,206,168,0.18); background: rgba(232,206,168,0.05); color: #DCC9A6; font-size: 17px;" />
 </div>
-<sc-if value="{{ showF2 }}" hint-placeholder-val="{{ true }}">
-<div class="dr-enter" style="margin-top: 10px; display: flex; flex-direction: column; gap: 10px;">
-<label for="dr-f2" style="font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 21px; color: #E0B878;">so that I feel…</label>
-<span style="margin-top: -4px; font-size: 15px; line-height: 1.45; color: #958772;">Name only the feeling you want. Leave the difficulty out of this line.</span>
-<input id="dr-f2" type="text" value="{{ f2 }}" onChange="{{ onF2 }}" placeholder="the feeling you want, in a few words" style="width: 100%; box-sizing: border-box; height: 54px; padding: 0 16px; border-radius: 18px; border: 1px solid rgba(232,206,168,0.18); background: rgba(232,206,168,0.05); color: #DCC9A6; font-size: 17px;" />
-<div style="display: flex; flex-wrap: wrap; gap: 8px;">
-<sc-for list="{{ sugB }}" as="o" hint-placeholder-count="4">
-<button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.selected }}" style="min-height: 44px; padding: 8px 15px; border-radius: 22px; border: {{ o.border }}; background: {{ o.bg }}; color: {{ o.color }}; font-size: 15px; text-align: left; cursor: pointer; transition: background 200ms, border-color 200ms, color 200ms;">{{ o.label }}</button>
-</sc-for>
-</div>
+</sc-if>
+<sc-if value="{{ askFeel }}" hint-placeholder-val="{{ false }}">
+<div class="dr-enter" style="margin-top: 8px; display: flex; flex-direction: column; gap: 10px;">
+<label for="dr-feel" style="font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 21px; color: #E0B878;">My feelings of…</label>
+<input id="dr-feel" type="text" value="{{ feel }}" onChange="{{ onFeel }}" placeholder="a feeling, in a word or two" autocomplete="off" style="width: 100%; box-sizing: border-box; height: 54px; padding: 0 16px; border-radius: 18px; border: 1px solid rgba(232,206,168,0.18); background: rgba(232,206,168,0.05); color: #DCC9A6; font-size: 17px;" />
 </div>
 </sc-if>
 <sc-if value="{{ showStatement }}" hint-placeholder-val="{{ true }}">
@@ -247,6 +243,34 @@ input.dr-range-day::-moz-range-thumb{background:#FBF8F3}
 <p aria-live="polite" style="margin: 0; min-height: 22px; font-size: 15px; line-height: 1.45; color: #958772;">{{ voiceNote }}</p>
 <sc-if value="{{ hasComposeHint }}" hint-placeholder-val="{{ false }}">
 <p class="dr-enter" style="margin: 0; padding: 12px 14px; border-radius: 16px; background: rgba(201,144,111,0.10); border: 1px solid rgba(201,144,111,0.25); display: flex; gap: 10px; font-size: 15px; line-height: 1.45; color: #D9A98C;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" style="flex: none; margin-top: 2px; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round;" aria-hidden="true"><path d="M12 3l1.8 6.2L20 11l-6.2 1.8L12 19l-1.8-6.2L4 11l6.2-1.8z"></path></svg><span>{{ composeHint }}</span></p>
+</sc-if>
+<button type="button" onClick="{{ toggleAdjust }}" aria-expanded="{{ adjustOpen }}" aria-controls="dr-adjust" style="align-self: flex-start; min-height: 44px; padding: 0 4px; display: flex; align-items: center; gap: 8px; border: none; background: transparent; color: #E0B878; font-size: 16px; font-weight: 600; cursor: pointer;"><span>Adjust the wording</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" style="transform: rotate({{ adjustTurn }}deg); transition: transform 200ms; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+<sc-if value="{{ adjustOpen }}" hint-placeholder-val="{{ false }}">
+<div id="dr-adjust" class="dr-enter" style="margin-top: -4px; padding: 18px; border-radius: 24px; background: rgba(232,206,168,0.04); border: 1px solid rgba(232,206,168,0.12); display: flex; flex-direction: column; gap: 20px;">
+<div role="group" aria-labelledby="dr-verb-l" style="display: flex; flex-direction: column; gap: 10px;">
+<span id="dr-verb-l" style="font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 19px; color: #E0B878;">I will fully…</span>
+<div style="display: flex; padding: 4px; gap: 4px; border-radius: 26px; background: rgba(232,206,168,0.06); border: 1px solid rgba(232,206,168,0.14);">
+<button type="button" onClick="{{ setExpress }}" aria-pressed="{{ vExpress.pressed }}" style="flex: 1; height: 44px; border: none; border-radius: 22px; background: {{ vExpress.bg }}; color: {{ vExpress.color }}; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 200ms, color 200ms;">express</button>
+<button type="button" onClick="{{ setResolve }}" aria-pressed="{{ vResolve.pressed }}" style="flex: 1; height: 44px; border: none; border-radius: 22px; background: {{ vResolve.bg }}; color: {{ vResolve.color }}; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 200ms, color 200ms;">resolve</button>
+</div>
+</div>
+<sc-if value="{{ editFeel }}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 10px;">
+<label for="dr-feel2" style="font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 19px; color: #E0B878;">my feelings of…</label>
+<input id="dr-feel2" type="text" value="{{ feel }}" onChange="{{ onFeel }}" autocomplete="off" style="width: 100%; box-sizing: border-box; height: 54px; padding: 0 16px; border-radius: 18px; border: 1px solid rgba(232,206,168,0.18); background: rgba(232,206,168,0.05); color: #DCC9A6; font-size: 17px;" />
+</div>
+</sc-if>
+<div role="group" aria-labelledby="dr-goal-l" style="display: flex; flex-direction: column; gap: 10px;">
+<span id="dr-goal-l" style="font-family: 'Fraunces', 'New York', ui-serif, Georgia, serif; font-size: 19px; color: #E0B878;">so that I regain…</span>
+<span style="margin-top: -4px; font-size: 15px; line-height: 1.45; color: #958772;">Naming what you hope to regain can help. For some people, simply expressing the feelings is enough.</span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+<sc-for list="{{ goalChips }}" as="o" hint-placeholder-count="3">
+<button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.selected }}" style="min-height: 44px; padding: 8px 15px; border-radius: 22px; border: {{ o.border }}; background: {{ o.bg }}; color: {{ o.color }}; font-size: 15px; text-align: left; cursor: pointer; transition: background 200ms, border-color 200ms, color 200ms;">{{ o.label }}</button>
+</sc-for>
+</div>
+<input type="text" value="{{ goalOwn }}" onChange="{{ onGoalOwn }}" aria-label="So that I regain, in your own words" placeholder="or in your own words" autocomplete="off" style="width: 100%; box-sizing: border-box; height: 54px; padding: 0 16px; border-radius: 18px; border: 1px solid rgba(232,206,168,0.18); background: rgba(232,206,168,0.05); color: #DCC9A6; font-size: 17px;" />
+</div>
+</div>
 </sc-if>
 </sc-if>
 </div>
@@ -1373,7 +1397,7 @@ class Component extends DCLogic {
       qMode: 'before', qIndex: 0, before: {}, after: {}, sleepTmp: 5,
       door: '', issue: '', cameUp: '',
       audioPlaying: false, audioPos: 0, audioDone: false,
-      f1: '', f2: '', intent: '', form: 'two', sheet: '',
+      f1: '', f2: '', intent: '', form: 'two', sheet: '', theme: '', verb: 'express', feel: '', who: '', goal: '', goalOwn: '', adjust: false,
       rate1: 5, rate2: 5, rate1After: 5, rate2After: 5,
       tts: false, ttsSpan: null, ttsWait: false, voiceMsg: '', previewing: '', nightSounds: true, vEngine: 'idle', vProg: 0,
       recState: 'none', recT: 0,
@@ -1481,50 +1505,47 @@ class Component extends DCLogic {
     return { f: (1 - Math.cos(2 * Math.PI * p)) / 2, waxing: p < 0.5 };
   }
 
+  // Robert Waggoner's wordings for the main issues people bring (email, 18 Nov 2026).
+  themes() {
+    return {
+      all: { label: 'All my feelings', verb: 'express', feel: '', goal: '' },
+      grief: { label: 'Grief', verb: 'express', feel: 'grief', goal: 'my natural vitality' },
+      depression: { label: 'Depression', verb: 'resolve', feel: 'depression', goal: 'my natural vitality' },
+      anxiety: { label: 'Anxiety', verb: 'resolve', feel: 'anxiety', goal: 'my natural vitality' },
+      esteem: { label: 'Self-esteem', verb: 'resolve', feel: 'self-esteem', goal: 'my natural vitality' },
+      stress: { label: 'Stress', verb: 'express', feel: 'stress', goal: 'my natural vitality' },
+      anger: { label: 'Anger', verb: 'express', feel: 'anger', goal: 'my constructive demeanor' },
+      relationship: { label: 'A relationship', verb: 'express', feel: 'concern about my relationship with', who: true, goal: '' },
+      other: { label: 'Something else', verb: 'express', feel: '', goal: 'my natural vitality', own: true }
+    };
+  }
+
   composeParts(st) {
     const cleanEnd = (t) => String(t || '').trim().replace(/[\s.!?;,:]+$/, '');
     const lowerFirst = (t) => (!t || /^I(\s|’|')/.test(t)) ? t : t.charAt(0).toLowerCase() + t.slice(1);
-    const shapeResolve = (t) => {
-      const x = cleanEnd(t);
-      if (!x) return '';
-      let m;
-      if ((m = x.match(/^i\s+feel\s+(?:like|that)\s+(.+)$/i))) return 'my feeling that ' + m[1];
-      if ((m = x.match(/^i\s+feel\s+(.+)$/i))) return 'my feeling of being ' + m[1];
-      if ((m = x.match(/^(?:i\s+am|i[’']m)\s+(.+)$/i))) return 'my feeling of being ' + m[1];
-      if (/^i(\s|’|')/i.test(x)) return 'my feeling that I' + x.slice(1);
-      return lowerFirst(x);
-    };
-    const shapeFeel = (t) => {
-      let x = cleanEnd(t);
-      x = x.replace(/^(?:so\s+that\s+)?i\s+(?:want\s+to\s+|would\s+like\s+to\s+)?feel\s+/i, '')
-        .replace(/^(?:to\s+)?feel\s+/i, '')
-        .replace(/^(?:i\s+am|i[’']m)\s+/i, '')
-        .replace(/^(?:to\s+)?be\s+/i, '');
-      return lowerFirst(x);
-    };
-    const shapeIntent = (t) => {
-      let x = cleanEnd(t);
-      x = x.replace(/^tonight\s+in\s+my\s+dreams,?\s*/i, '').replace(/^i\s+will\s+/i, '').replace(/^to\s+/i, '');
-      return lowerFirst(x);
-    };
-    const twoPart = st.form !== 'single';
-    const p1 = shapeResolve(st.f1);
-    const p2 = shapeFeel(st.f2);
-    const pi = shapeIntent(st.intent);
-    const filled = twoPart ? !!(p1 && p2) : !!pi;
-    const close1 = 'in such a way that no one is harmed,';
-    const close2 = 'and in everyone’s best interest.';
-    const segs = twoPart
-      ? [{ t: 'Tonight in my dreams,' }, { t: 'I will resolve' }, { t: p1, slot: 'f1', ph: 'what you’d like to resolve' }, { t: 'so that I feel' }, { t: p2, slot: 'f2', ph: 'how you’d like to feel' }, { t: close1 }, { t: close2 }]
-      : [{ t: 'Tonight in my dreams,' }, { t: 'I will' }, { t: pi, slot: 'intent', ph: 'what you’d like to do or allow' }, { t: close1 }, { t: close2 }];
-    const lines = segs.map((g) => Object.assign({}, g, { text: g.slot ? (g.t ? g.t + ',' : '') : g.t }));
+    const shapeFeel = (t) => lowerFirst(cleanEnd(t).replace(/^(?:all\s+of\s+)?my\s+feelings?\s+(?:of|about)\s+/i, '').replace(/^feelings?\s+(?:of|about)\s+/i, ''));
+    const shapeGoal = (t) => lowerFirst(cleanEnd(t).replace(/^so\s+that\s+/i, '').replace(/^i\s+(?:can\s+)?/i, '').replace(/^regain\s+/i, ''));
+    const th = this.themes()[st.theme] || null;
+    const verb = st.verb === 'resolve' ? 'resolve' : 'express';
+    const feel = shapeFeel(st.feel);
+    const who = cleanEnd(st.who);
+    const goal = th ? shapeGoal(st.goal) : '';
+    const hasGoal = !!goal;
+    const BLANK = '_______';
+    const isAll = st.theme === 'all';
+    const objText = isAll ? 'all of my feelings' : 'my feelings of ' + (feel || BLANK) + (th && th.who ? ' ' + (who || BLANK) : '');
+    const filled = !!th && (isAll || !!feel) && (!th || !th.who || !!who);
+    const segs = [{ t: 'Tonight in my dreams,' }, { t: 'I will fully ' + verb }, { t: objText, slot: 'feel' }];
+    if (hasGoal) segs.push({ t: 'so that I regain' }, { t: goal, slot: 'goal' });
+    segs.push({ t: (hasGoal ? 'and ' : '') + 'in such a way that no one is harmed' }, { t: 'and in everyone’s best interest.' });
+    const lines = segs.map((g) => Object.assign({}, g, { text: g.t }));
     let pos = 0;
     lines.forEach((ln) => { ln.start = pos; pos += ln.text.length + 1; });
     const statement = filled ? lines.map((l) => l.text).join(' ') : '';
-    // Phrases the voice reads, with a breath between each: the opening, the heart of it, then the closing lines.
-    const groups = twoPart ? [[0], [1, 2], [3, 4], [5], [6]] : [[0], [1, 2], [3], [4]];
+    // Phrases the voice reads, with a breath between each.
+    const groups = hasGoal ? [[0], [1, 2], [3, 4], [5], [6]] : [[0], [1, 2], [3], [4]];
     const chunks = filled ? groups.map((g) => ({ text: g.map((i) => lines[i].text).join(' '), from: g[0], to: g[g.length - 1] })) : [];
-    return { twoPart: twoPart, p1: p1, p2: p2, pi: pi, filled: filled, lines: lines, statement: statement, chunks: chunks, groups: groups };
+    return { twoPart: hasGoal, hasGoal: hasGoal, isAll: isAll, verb: verb, feel: feel, who: who, goal: goal, objText: objText, p1: objText, p2: goal, pi: objText, started: !!th, filled: filled, lines: lines, statement: statement, chunks: chunks, groups: groups };
   }
 
   // The calm voice: phrases from the suggestions are pre-rendered; anything typed is made in a background worker.
@@ -1788,20 +1809,19 @@ class Component extends DCLogic {
     };
     const sample = [
       { day: 2, answer: 'A little', text: 'Woke up lighter than usual. My shoulders feel less tight.' },
-      { day: 6, answer: 'Yes', text: 'Laughed easily at breakfast. Felt less guarded.' },
-      { day: 12, answer: 'A little', text: 'Said what I meant on a call, without rehearsing it first.' },
-      { day: 19, answer: 'Yes', text: 'Calm all morning. I think I spoke up in a dream.' },
-      { day: 27, answer: 'A little', text: 'Steadier. Less rehearsing in my head before I speak.' }
+      { day: 6, answer: 'Yes', text: 'Laughed easily at breakfast. Felt more like myself.' },
+      { day: 12, answer: 'A little', text: 'Cried in a dream and woke up feeling clearer.' },
+      { day: 19, answer: 'Yes', text: 'More energy all morning. Went for a long walk.' },
+      { day: 27, answer: 'A little', text: 'Steadier. Thought of her and smiled.' }
     ];
     const st = this.state;
     const base = { banner: '', unlocking: false, speaking: false, breathing: false, privacyMsg: '', sheet: '', alert: false, tts: false, ttsSpan: null, ttsWait: false, holding: false, island: 'compact', islandPhase: 'bed', lockPhase: 'bed', mPhase: 'ask', mAnswer: '', backfillDone: false, reads: 0, note: '', dream: '', showDream: false, reh: 0, aOn: false, aPaused: false, lockDim: false, selMoon: 0, laOpen: false, playedTonight: false, aSpan: null, aWait: false, aSrc: '', previewing: '', cycle: 1, history: [], archived: 0, renew: '', resting: false, qMode: 'before' };
     if (!st.setupDone) {
       Object.assign(base, { setupDone: true, adult: true, notifAllowed: true, liveOn: true, door: 'know', before: { w1: 2, w2: 2, w3: 1, w4: 1, w5: 2, sleep: 5, recall: 1 }, rate1: 7, rate2: 3 });
     }
-    if (!st.f1.trim() && !st.intent.trim()) base.f1 = 'I feel unable to say what I truly feel';
-    if (!st.f2.trim() && !st.intent.trim()) base.f2 = 'free to express my true feelings';
+    if (!this.composeParts(st).filled) Object.assign(base, { theme: 'grief', verb: 'express', feel: 'grief', who: '', goal: 'my natural vitality', goalOwn: '' });
     let extra = {};
-    if (v === 'compose') extra = { screen: 'compose', setupDone: false, form: 'two', f1: st.f1, f2: st.f2 };
+    if (v === 'compose') extra = { screen: 'compose', setupDone: false };
     else if (v === 'seal') extra = { screen: 'seal', sealed: false };
     else if (v === 'lockBed' || v === 'lockPlay') extra = { screen: 'lock', night: 3, practiced: fill(2), notes: sample.slice(0, 1) };
     else if (v === 'homeBed') extra = { screen: 'homeScreen', night: 3, practiced: fill(2), notes: sample.slice(0, 1) };
@@ -1815,7 +1835,6 @@ class Component extends DCLogic {
     else if (v === 'cycleNext' || v === 'rest' || v === 'home2') {
       const done30 = { night: 30, practiced: fill(30, [9, 17, 23]), notes: sample, qMode: 'after', after: { w1: 4, w2: 4, w3: 3, w4: 3, w5: 4, sleep: 7, recall: 3 }, rate1After: 3, rate2After: 8, globalChange: 5, remarked: 'Yes', difficult: 'No', gave: false,
         before: { w1: 2, w2: 2, w3: 1, w4: 1, w5: 2, sleep: 5, recall: 1 }, rate1: 7, rate2: 3, form: 'two', setupDone: true, adult: true, notifAllowed: true, liveOn: true };
-      if (!st.f1.trim() || !st.f2.trim()) Object.assign(done30, { f1: 'I feel unable to say what I truly feel', f2: 'free to express my true feelings' });
       if (v === 'cycleNext') extra = Object.assign(done30, { screen: 'next' });
       else {
         const rec = this.cycleRecord(Object.assign({}, st, base, done30, { cycle: 1 }));
@@ -1896,37 +1915,17 @@ class Component extends DCLogic {
     const twoPart = cp.twoPart;
     const statement = cp.statement;
 
-    // Local suggestions
-    const text = String(s.f1 || '').toLowerCase();
-    const THEMES = [
-      { k: ['partner', 'husband', 'wife', 'boyfriend', 'girlfriend', 'spouse', 'relationship', 'marriage'], a: ['I feel unable to say what I truly feel', 'my fear of being misunderstood by the people I love', 'the distance I feel in my relationship'], b: ['free to express my true feelings', 'close and at ease', 'heard and understood'] },
-      { k: ['mad', 'angry', 'anger', 'furious', 'resent', 'irritat', 'frustrat'], a: ['the anger I’ve been carrying', 'my frustration at not being heard'], b: ['calm and clear', 'at peace'] },
-      { k: ['work', 'boss', 'job', 'career', 'colleague', 'coworker', 'team'], a: ['my fear of speaking up at work', 'the pressure I feel at work'], b: ['confident and clear at work', 'steady and capable'] },
-      { k: ['worry', 'worried', 'anxious', 'anxiety', 'fear', 'afraid', 'scared', 'nervous', 'panic'], a: ['the worry that keeps returning', 'my fear of what might happen'], b: ['calm and settled', 'safe and steady'] },
-      { k: ['grief', 'loss', 'lost', 'died', 'death', 'miss '], a: ['the heaviness of this loss', 'the grief I’ve been holding'], b: ['at peace, with a sense of acceptance', 'gentle with myself'] },
-      { k: ['stuck', 'decide', 'decision', 'choose', 'direction', 'purpose'], a: ['my feeling of being stuck', 'my confusion about what comes next'], b: ['clear about my next step', 'free to move forward'] },
-      { k: ['hurt', 'betray', 'forgive', 'wound', 'abandon'], a: ['the hurt I still carry', 'my sense of being let down'], b: ['whole and at peace', 'open-hearted and free'] },
-      { k: ['enough', 'worth', 'confiden', 'failure', 'ashamed', 'shame', 'not good'], a: ['my feeling that I’m not enough', 'the shame I’ve been carrying'], b: ['worthy just as I am', 'confident in myself'] },
-      { k: ['sleep', 'tired', 'exhaust', 'rest'], a: ['the restlessness I bring to bed', 'my worry about not sleeping'], b: ['rested and at ease', 'deeply calm'] }
-    ];
-    let A = [];
-    let B = [];
-    THEMES.forEach((th) => { if (th.k.some((w) => text.indexOf(w) >= 0)) { A = A.concat(th.a); B = B.concat(th.b); } });
-    A = A.concat(['what’s been weighing on me', 'the feeling underneath this']);
-    B = B.concat(['calm and at ease', 'light and free', 'clear and confident']);
-    const uniq = (xs) => xs.filter((x, i) => xs.indexOf(x) === i).slice(0, 3);
-    A = uniq(A);
-    B = B.filter((x, i) => B.indexOf(x) === i).slice(0, 4);
-    const STARTS = [
-      ['Worry', 'the worry that keeps returning'], ['Anger', 'the anger I’ve been carrying'], ['Not feeling enough', 'my feeling that I’m not enough'],
-      ['An old hurt', 'the hurt I still carry'], ['Feeling stuck', 'my feeling of being stuck'], ['Grief', 'the grief I’ve been holding'],
-      ['Pressure at work', 'the pressure I feel at work'], ['Distance in a relationship', 'the distance I feel in my relationship']
-    ];
+    // Robert's themes
+    const TH = this.themes();
+    const ORDER = ['all', 'grief', 'depression', 'anxiety', 'esteem', 'stress', 'anger', 'relationship', 'other'];
     const toBottom = () => { setTimeout(() => { const el = self._scrollEl; if (el) { try { el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' }); } catch (e) { el.scrollTop = el.scrollHeight; } } }, 80); };
     const chipLook = (sel) => ({ selected: sel, bg: sel ? 'rgba(192,138,62,0.20)' : N.glass, border: sel ? '1.5px solid ' + N.accent : '1px solid ' + N.line, color: sel ? '#F0D3A0' : '#BDAE95' });
-    const startChips = STARTS.map((x) => Object.assign({ label: x[0], pick: () => { self.stopSpeech(); self.setState({ f1: x[1], form: 'two', tts: false, ttsSpan: null, ttsWait: false }); toBottom(); } }, chipLook(s.f1 === x[1])));
-    const feelChips = B.map((label) => Object.assign({ label: label, pick: () => { self.stopSpeech(); self.setState({ f2: label, form: 'two', tts: false, ttsSpan: null, ttsWait: false }); toBottom(); } }, chipLook(s.f2 === label)));
-    const intentSugs = uniq(['allow myself to feel ' + B[0], 'meet this feeling with kindness', 'find what I need to feel ' + (B[1] || B[0])]);
+    const quiet = { tts: false, ttsSpan: null, ttsWait: false };
+    const pickTheme = (k) => () => { self.stopSpeech(); const t = TH[k]; self.setState(Object.assign({ theme: k, verb: t.verb, feel: t.feel, goal: t.goal, goalOwn: '' }, quiet)); if (!t.who && !t.own) toBottom(); };
+    const themeChips = ORDER.map((k) => Object.assign({ label: TH[k].label, pick: pickTheme(k) }, chipLook(s.theme === k)));
+    const GOALS = [['My natural vitality', 'my natural vitality'], ['My constructive demeanor', 'my constructive demeanor'], ['Leave this out', '']];
+    const goalChips = GOALS.map((g) => Object.assign({ label: g[0], pick: () => { self.stopSpeech(); self.setState(Object.assign({ goal: g[1], goalOwn: '' }, quiet)); } }, chipLook(!s.goalOwn && (s.goal || '') === g[1])));
+    const segLook = (on) => ({ pressed: on, bg: on ? '#C08A3E' : 'transparent', color: on ? '#1A140C' : '#BDAE95' });
     const chipList = (xs, key) => xs.map((label) => {
       const sel = s[key] === label;
       return { label: label, selected: sel, pick: () => { const o = {}; o[key] = label; self.setState(o); }, bg: sel ? N.selBg : N.glass, border: sel ? '1.5px solid ' + N.accent : '1px solid ' + N.line };
@@ -1998,22 +1997,20 @@ class Component extends DCLogic {
         edit: () => self.setState({ sheet: ln.slot })
       };
     });
-    const low = (twoPart ? cp.p1 + ' ' + cp.p2 : cp.pi).toLowerCase();
-    const feelPart = (twoPart ? cp.p2 : cp.pi).toLowerCase();
-    const resPart = (twoPart ? cp.p1 : cp.pi).toLowerCase();
+    const feelLow = (cp.isAll ? '' : (cp.feel + ' ' + cp.who)).toLowerCase();
+    const goalLow = (cp.goal || '').toLowerCase();
+    const low = feelLow + ' ' + goalLow;
     const othersRe = /\b(make|get|force|change|fix|convince)\s+(him|her|them|my\s+\w+)\b/;
     const cureRe = /\b(cure|cured|my\s+(illness|disease|cancer|condition|diagnosis))\b/;
     const negRe = /\b(not|no longer|never|stop|don[’']t|won[’']t|can[’']t|less|without)\b/;
-    const echoRe = /\b(lost|loss|losing|hurt\w*|pain\w*|grief|griev\w*|fear\w*|afraid|scared|anxi\w*|worr\w*|anger|angry|sad|sadness|stress\w*|pressure|shame|ashamed|guilt\w*|lonel\w*|stuck|problem\w*|struggl\w*|burden\w*|past|rid of|free (?:of|from)|let(?:ting)? (?:it|this|that|them|him|her) go|over (?:it|this|that|them|him|her))\b/;
-    const andCount = (resPart.match(/\band\b/g) || []).length;
-    const midWords = low.split(/\s+/).filter(Boolean).length;
+    const echoRe = /\b(lost|loss|losing|hurt\w*|pain\w*|grief|griev\w*|fear\w*|afraid|scared|anxi\w*|worr\w*|anger|angry|sad|sadness|stress\w*|pressure|shame|ashamed|guilt\w*|lonel\w*|depress\w*|stuck|problem\w*|struggl\w*|burden\w*|past|rid of|free (?:of|from))\b/;
     const others = othersRe.test(low);
     const CHECKS = [
       { label: 'About your inner world', ok: !others && !cureRe.test(low), hint: others ? 'Keep the focus on your own feelings, rather than changing someone else.' : 'This practice works with feelings, not medical conditions.' },
-      { label: 'One focus', ok: andCount < 2 && resPart.indexOf(';') < 0, hint: 'Try one feeling for these thirty nights. You can begin another cycle later.' },
-      { label: 'Said as what you want', ok: !negRe.test(feelPart), hint: 'Name the feeling you want, like “calm” rather than “not anxious.”' },
-      { label: 'Only the feeling you want', ok: !twoPart || !echoRe.test(feelPart), hint: 'Leave the difficulty out of this line, so your mind holds only the feeling you want: “at peace, with a sense of acceptance” rather than “at peace with what I’ve lost.”' },
-      { label: 'Easy to repeat', ok: midWords <= 26, hint: 'Trim a few words so it’s easy to read three times.' }
+      { label: 'One focus', ok: (feelLow.match(/\band\b/g) || []).length < 2 && feelLow.indexOf(';') < 0, hint: 'Try one feeling for these thirty nights. You can begin another cycle later.' },
+      { label: 'Said as what you hope for', ok: !negRe.test(goalLow), hint: 'Name what you hope to regain, like “my natural vitality” rather than “not feeling drained.”' },
+      { label: 'Only what you hope to regain', ok: !echoRe.test(goalLow), hint: 'Keep the difficulty out of the “so that I regain” line, so it holds only what you hope for.' },
+      { label: 'Easy to repeat', ok: low.split(/\s+/).filter(Boolean).length <= 16, hint: 'Trim a few words so it’s easy to read three times.' }
     ];
     const allOk = CHECKS.every((c) => c.ok);
     const checks = CHECKS.map((c) => {
@@ -2040,10 +2037,9 @@ class Component extends DCLogic {
     else if (recording) voiceNote = 'Recording. Read your statement slowly, then tap Stop.';
     else if (s.recState === 'done') voiceNote = 'Your recording is saved on this phone. Choose it under statement audio.';
     else if (cp.filled) voiceNote = 'About ' + perRead + ' seconds to read. Tap Hear it for how it sounds at bedtime.';
+    else if (cp.started) voiceNote = s.theme === 'relationship' ? 'Add who the relationship is with to finish your statement.' : 'Add the feeling to finish your statement.';
     const SHEET = {
-      f1: { title: 'I will resolve…', ph: 'e.g. I feel unable to say what I really feel', tip: 'Name the feeling, not the person. Start however you like; it’s shaped to fit.', preview: '…I will resolve ' + (cp.p1 || '…') + ',', sug: A },
-      f2: { title: 'So that I feel…', ph: 'e.g. free to express myself', tip: 'Only the feeling you want, in a few words.', preview: '…so that I feel ' + (cp.p2 || '…') + ',', sug: B },
-      intent: { title: 'I will…', ph: 'e.g. allow myself to speak freely', tip: 'One thing you’d like to do or allow, in your own words.', preview: '…I will ' + (cp.pi || '…') + ',', sug: intentSugs }
+      f1: { title: 'My feelings of…', ph: 'e.g. grief', tip: '', preview: '', sug: [] }
     };
     const sheetKey = s.sheet;
     const sh = SHEET[sheetKey] || SHEET.f1;
@@ -2258,7 +2254,8 @@ class Component extends DCLogic {
     const whoA = whoScore(s.after);
     const GLOBAL = ['Much worse', 'Worse', 'A little worse', 'About the same', 'A little better', 'Better', 'Much better'];
     const noticed = s.notes.filter((n) => n.answer !== 'Not really').slice(-1)[0];
-    const rQuote1 = twoPart ? (cp.p1 || s.issue) : (cp.pi || s.issue);
+    const rQuote1 = cp.objText;
+    const rQuote2 = cp.hasGoal ? 'regaining ' + cp.goal : 'at ease inside';
     const phaseRow = [0.06, 0.22, 0.5, 1, 0.5, 0.22, 0.06].map((f, i) => ({ d: this.moonD(f, i < 3), fill: i === 3 ? '#DCBF90' : 'rgba(220,191,144,0.55)' }));
     const PLAY = 'M8 5.5v13l11-6.5z';
     const PAUSE = 'M7 5h3.5v14H7zM13.5 5H17v14h-3.5z';
@@ -2325,7 +2322,7 @@ class Component extends DCLogic {
       title: 'Cycle ' + h.n,
       lit: h.lit + ' of 30 nights',
       statement: h.statement,
-      chip1: h.r1a != null ? (h.twoPart ? 'Feeling ' : 'Issue ') + h.r1b + ' → ' + h.r1a : 'Ended early',
+      chip1: h.r1a != null ? 'Feelings ' + h.r1b + ' → ' + h.r1a : 'Ended early',
       chip2: h.r2a != null ? 'Closeness ' + h.r2b + ' → ' + h.r2a : '',
       hasChip2: h.r2a != null,
       moons: strip(h.lits || [])
@@ -2441,10 +2438,26 @@ class Component extends DCLogic {
       f2: s.f2,
       onF1: (e) => { self.stopSpeech(); self.setState({ f1: e.target.value, form: 'two', tts: false, ttsSpan: null, ttsWait: false }); },
       onF2: (e) => { self.stopSpeech(); self.setState({ f2: e.target.value, form: 'two', tts: false, ttsSpan: null, ttsWait: false }); },
-      sugA: startChips,
-      sugB: feelChips,
+      themeChips: themeChips,
+      goalChips: goalChips,
+      who: s.who,
+      feel: s.feel,
+      goalOwn: s.goalOwn,
+      onWho: (e) => { self.stopSpeech(); self.setState(Object.assign({ who: e.target.value }, quiet)); },
+      onFeel: (e) => { self.stopSpeech(); self.setState(Object.assign({ feel: e.target.value }, quiet)); },
+      onGoalOwn: (e) => { self.stopSpeech(); self.setState(Object.assign({ goalOwn: e.target.value, goal: e.target.value }, quiet)); },
+      askWho: s.theme === 'relationship',
+      askFeel: s.theme === 'other',
+      editFeel: !!s.theme && s.theme !== 'all' && s.theme !== 'other',
+      adjustOpen: !!s.adjust,
+      adjustTurn: s.adjust ? 180 : 0,
+      toggleAdjust: () => self.setState({ adjust: !s.adjust }),
+      vExpress: segLook(cp.verb === 'express'),
+      vResolve: segLook(cp.verb === 'resolve'),
+      setExpress: () => { self.stopSpeech(); self.setState(Object.assign({ verb: 'express' }, quiet)); },
+      setResolve: () => { self.stopSpeech(); self.setState(Object.assign({ verb: 'resolve' }, quiet)); },
       showF2: !!s.f1.trim() || !!s.f2.trim(),
-      showStatement: cp.filled,
+      showStatement: cp.started,
       composeKicker: s.renew ? 'Cycle ' + nextCycle + ' · your intention' : 'Your intention',
       composeHint: composeHint,
       hasComposeHint: !!composeHint,
@@ -2458,9 +2471,10 @@ class Component extends DCLogic {
       rateStep: afterMode ? 'Night 30' : (s.renew ? 'Cycle ' + nextCycle + ' · your starting point' : 'Your starting point'),
       rateTitle: afterMode ? 'Where are you with this now?' : 'Where are you with this today?',
       rateLead: afterMode ? 'Answer as you feel today.' : 'Two quick ratings. You’ll answer them again on night 30 to see what has changed.',
-      rPrompt1: twoPart ? 'Right now, how strong is this feeling?' : 'Right now, how strong is this issue?',
+      rPrompt1: cp.isAll ? 'Right now, how much are you holding your feelings in?' : 'Right now, how strong are these feelings?',
+      rPrompt2: cp.hasGoal ? 'How close do you feel to this?' : 'Overall, how at ease do you feel?',
       rQuote1: '“' + rQuote1 + '”',
-      rQuote2: '“' + (twoPart ? (cp.p2 || '…') : (cp.pi || '…')) + '”',
+      rQuote2: '“' + rQuote2 + '”',
       r1: afterMode ? s.rate1After : s.rate1,
       r2: afterMode ? s.rate2After : s.rate2,
       r1pct: (afterMode ? s.rate1After : s.rate1) * 10,
@@ -2762,7 +2776,7 @@ class Component extends DCLogic {
         self.stopSpeech();
         if (renewPick === 'keep') self.setState({ renew: 'keep', screen: 'seal', sealed: false, reh: 0, holding: false });
         else if (renewPick === 'refine') self.setState({ renew: 'refine', screen: 'compose', form: 'two', sealed: false, reh: 0, sheet: '' });
-        else self.setState({ renew: 'new', screen: 'compose', door: '', issue: '', cameUp: '', f1: '', f2: '', intent: '', form: 'two', rate1: 5, rate2: 5, sealed: false, reh: 0, sheet: '', recState: 'none' });
+        else self.setState({ renew: 'new', screen: 'compose', door: '', issue: '', cameUp: '', f1: '', f2: '', intent: '', form: 'two', theme: '', verb: 'express', feel: '', who: '', goal: '', goalOwn: '', adjust: false, rate1: 5, rate2: 5, sealed: false, reh: 0, sheet: '', recState: 'none' });
       },
 
       cycleStartBack: go('seal'),
@@ -2811,8 +2825,8 @@ class Component extends DCLogic {
       toReveal: () => { if (s.globalChange >= 0) self.setState({ screen: 'reveal' }); },
 
       revealRows: [
-        { title: twoPart ? 'Strength of the feeling' : 'Strength of the issue', quote: '“' + rQuote1 + '”', b: s.rate1, a: s.rate1After, good: -1, minLabel: 'Not at all', maxLabel: 'Extremely' },
-        { title: 'Closeness to how you want to feel', quote: '“' + (twoPart ? (cp.p2 || '…') : (cp.pi || '…')) + '”', b: s.rate2, a: s.rate2After, good: 1, minLabel: 'Not at all', maxLabel: 'Completely' }
+        { title: cp.isAll ? 'Holding feelings in' : 'Strength of the feelings', quote: '“' + rQuote1 + '”', b: s.rate1, a: s.rate1After, good: -1, minLabel: 'Not at all', maxLabel: 'Extremely' },
+        { title: cp.hasGoal ? 'Closeness to what you hope to regain' : 'At ease inside', quote: '“' + rQuote2 + '”', b: s.rate2, a: s.rate2After, good: 1, minLabel: 'Not at all', maxLabel: 'Completely' }
       ].map((r) => {
         const d = r.a - r.b;
         const better = d * r.good > 0;
